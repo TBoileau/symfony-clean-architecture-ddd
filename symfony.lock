@@ -20,6 +20,18 @@
     "composer/xdebug-handler": {
         "version": "2.0.2"
     },
+    "dama/doctrine-test-bundle": {
+        "version": "6.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "56eaa387b5e48ebcc7c95a893b47dfa1ad51449c"
+        },
+        "files": [
+            "config/packages/test/dama_doctrine_test_bundle.yaml"
+        ]
+    },
     "dealerdirect/phpcodesniffer-composer-installer": {
         "version": "v0.7.1"
     },
