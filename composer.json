@@ -44,6 +44,7 @@
     },
     "require-dev": {
         "friendsoftwig/twigcs": "^5.1",
+        "nunomaduro/phpinsights": "^2.0",
         "phpmd/phpmd": "^2.10",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "5.3.*",
