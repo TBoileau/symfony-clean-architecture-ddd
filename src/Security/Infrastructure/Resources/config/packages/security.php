@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Security\Infrastructure\UserProvider\UserProvider;
+use App\Security\Infrastructure\AuthenticationEntryPoint;
+use App\Security\Infrastructure\Authenticator;
+use App\Security\Infrastructure\Provider;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Config\SecurityConfig;
 
@@ -11,7 +13,7 @@ return static function (SecurityConfig $security): void {
 
     $security->passwordHasher(PasswordAuthenticatedUserInterface::class)->algorithm('auto');
 
-    $security->provider('security_provider')->id(UserProvider::class);
+    $security->provider('security_provider')->id(Provider::class);
 
     $security->firewall('dev')
         ->pattern('^/(_(profiler|wdt)|css|images|js)/')
@@ -19,5 +21,13 @@ return static function (SecurityConfig $security): void {
 
     $security->firewall('main')
         ->lazy(true)
-        ->provider('security_provider');
+        ->pattern('^/')
+        ->provider('security_provider')
+        ->entryPoint(AuthenticationEntryPoint::class)
+        ->customAuthenticators([Authenticator::class])
+        ->logout()
+            ->path('security_logout');
+
+    $security->accessControl()->path('^/security')->roles(['PUBLIC_ACCESS']);
+    $security->accessControl()->path('^/')->roles(['ROLE_USER']);
 };

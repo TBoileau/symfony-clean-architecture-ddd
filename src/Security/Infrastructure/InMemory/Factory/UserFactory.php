@@ -19,8 +19,8 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<User>
  *
- * @method static User[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static UserRepository|RepositoryProxy repository()
+ * @method static     array<array-key, User|Proxy> createMany(int $number, array|callable $attributes = [])
+ * @method static     UserRepository|RepositoryProxy repository()
  * @method User|Proxy create(array|callable $attributes = [])
  */
 final class UserFactory extends ModelFactory
@@ -35,6 +35,9 @@ final class UserFactory extends ModelFactory
         return User::class;
     }
 
+    /**
+     * @return array{identifier: Identifier, email: EmailAddress, password: Password}
+     */
     protected function getDefaults(): array
     {
         return [
@@ -50,7 +53,7 @@ final class UserFactory extends ModelFactory
                     },
                     'password'
                 )
-            )
+            ),
         ];
     }
 }

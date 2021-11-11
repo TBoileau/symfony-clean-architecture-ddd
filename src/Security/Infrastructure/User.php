@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Infrastructure\Model;
+namespace App\Security\Infrastructure;
 
-use App\Security\Domain\Entity\User;
+use App\Security\Domain\Entity\User as DomainUser;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class SymfonyUser implements UserInterface, PasswordAuthenticatedUserInterface
+final class User implements UserInterface, PasswordAuthenticatedUserInterface, EquatableInterface
 {
-    private User $user;
+    private DomainUser $user;
 
-    public function __construct(User $user)
+    public function __construct(DomainUser $user)
     {
         $this->user = $user;
     }
@@ -47,5 +48,10 @@ final class SymfonyUser implements UserInterface, PasswordAuthenticatedUserInter
     public function getUserIdentifier(): string
     {
         return (string) $this->user->email;
+    }
+
+    public function isEqualTo(UserInterface $user): bool
+    {
+        return $user->getUserIdentifier() === $this->getUserIdentifier();
     }
 }

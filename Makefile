@@ -2,8 +2,8 @@ composer:
 	composer valid
 
 twig:
-	php bin/console lint:twig src/Shared/Infrastructure/Resources/templates
-	vendor/bin/twigcs src/Shared/Infrastructure/Resources/templates
+	php bin/console lint:twig src/Shared/Infrastructure/Resources/templates src/Security/Infrastructure/Resources/templates
+	vendor/bin/twigcs src/Shared/Infrastructure/Resources/templates src/Security/Infrastructure/Resources/templates
 
 phpmd:
 	vendor/bin/phpmd src/ text .phpmd.xml
@@ -20,9 +20,13 @@ phpstan:
 fix:
 	vendor/bin/php-cs-fixer fix
 
+container:
+	php bin/console lint:container
+
 analyse:
 	make composer
 	make twig
+	make container
 	make phpcpd
 	make phpmd
 	make phpinsights

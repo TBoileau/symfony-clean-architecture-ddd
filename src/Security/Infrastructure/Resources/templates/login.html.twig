@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <form method="post">
+        {% if vm.error %}
+            <div class="error">{{ vm.error.messageKey|trans(vm.error.messageData, 'security') }}</div>
+        {% endif %}
+        <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
+        <label for="inputEmail">Email</label>
+        <input type="email" value="{{ vm.lastUsername }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+    </form>
+{% endblock %}

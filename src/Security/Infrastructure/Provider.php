@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Infrastructure\UserProvider;
+namespace App\Security\Infrastructure;
 
 use App\Security\Domain\Gateway\UserGateway;
-use App\Security\Infrastructure\Model\SymfonyUser;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-final class UserProvider implements UserProviderInterface
+final class Provider implements UserProviderInterface
 {
     public function __construct(private UserGateway $userGateway)
     {
@@ -23,7 +22,7 @@ final class UserProvider implements UserProviderInterface
 
     public function supportsClass(string $class): bool
     {
-
+        return User::class === $class;
     }
 
     public function loadUserByUsername(string $username): UserInterface
@@ -35,10 +34,10 @@ final class UserProvider implements UserProviderInterface
     {
         $user = $this->userGateway->getUserByEmail($identifier);
 
-        if ($user === null) {
+        if (null === $user) {
             throw new UserNotFoundException();
         }
 
-        return new SymfonyUser($user);
+        return new User($user);
     }
 }

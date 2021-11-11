@@ -23,7 +23,7 @@ final class Kernel extends BaseKernel
         $contents = require $this->getProjectDir().'/src/Shared/Infrastructure/Resources/config/bundles.php';
 
         /**
-         * @var class-string $class
+         * @var class-string        $class
          * @var array<string, bool> $envs
          */
         foreach ($contents as $class => $envs) {
@@ -39,6 +39,7 @@ final class Kernel extends BaseKernel
     {
         $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/packages/*.php');
         $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/packages/'.$this->environment.'/*.php');
+        $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/{services}.php');
         $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/{services}.php');
         $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/{services}'.$this->environment.'.php');
     }
