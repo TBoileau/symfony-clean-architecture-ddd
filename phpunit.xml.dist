@@ -38,6 +38,7 @@
     </listeners>
     <extensions>
         <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
+        <extension class="Symfony\Component\Panther\ServerExtension" />
     </extensions>
     <logging>
         <junit outputFile="var/coverage/junit.xml"/>
