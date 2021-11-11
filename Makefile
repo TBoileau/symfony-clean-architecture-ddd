@@ -30,6 +30,7 @@ analyse:
 
 .PHONY: tests
 tests:
+	vendor/bin/behat
 	php bin/phpunit
 
 fixtures:
