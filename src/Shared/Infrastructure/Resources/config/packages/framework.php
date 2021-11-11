@@ -11,11 +11,11 @@ return static function (FrameworkConfig $framework): void {
         ->httpMethodOverride(false);
 
     $framework->phpErrors()
-            ->log(true);
+        ->log(true);
 
     $framework->session()
-            ->handlerId(null)
-            ->cookieSecure('auto')
-            ->cookieSamesite('lax')
-            ->storageFactoryId('session.storage.factory.native');
+        ->handlerId(null)
+        ->cookieSecure('auto')
+        ->cookieSamesite('lax')
+        ->storageFactoryId('session.storage.factory.native');
 };

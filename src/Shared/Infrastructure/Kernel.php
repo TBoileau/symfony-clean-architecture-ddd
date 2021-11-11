@@ -19,11 +19,18 @@ final class Kernel extends BaseKernel
      */
     public function registerBundles(): iterable
     {
+        /** @var array<class-string, array<string, bool>> $contents */
         $contents = require $this->getProjectDir().'/src/Shared/Infrastructure/Resources/config/bundles.php';
 
+        /**
+         * @var class-string $class
+         * @var array<string, bool> $envs
+         */
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {
-                yield new $class();
+                /** @var BundleInterface $bundle */
+                $bundle = new $class();
+                yield $bundle;
             }
         }
     }
