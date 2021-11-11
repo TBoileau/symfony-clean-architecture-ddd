@@ -22,3 +22,10 @@ phpstan:
 fix:
 	vendor/bin/php-cs-fixer fix
 
+analyse:
+	make composer
+	make twig
+	make phpcpd
+	make phpmd
+	make phpinsights
+	make phpstan
