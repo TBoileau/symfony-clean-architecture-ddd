@@ -267,6 +267,9 @@
     "sebastian/object-reflector": {
         "version": "2.0.4"
     },
+    "sebastian/phpcpd": {
+        "version": "6.0.3"
+    },
     "sebastian/recursion-context": {
         "version": "4.0.4"
     },

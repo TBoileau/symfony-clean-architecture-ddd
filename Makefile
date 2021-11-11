@@ -1,4 +1,4 @@
-.PHONE: twig phpmd phpinsights
+.PHONE: twig phpmd phpinsights phpcpd
 
 twig:
 	php bin/console lint:twig templates
@@ -9,6 +9,9 @@ phpmd:
 
 phpinsights:
 	vendor/bin/phpinsights --no-interaction
+
+phpcpd:
+	vendor/bin/phpcpd src/
 
 fix:
 	vendor/bin/php-cs-fixer fix
