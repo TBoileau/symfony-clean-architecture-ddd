@@ -2,8 +2,8 @@ composer:
 	composer valid
 
 twig:
-	php bin/console lint:twig templates
-	vendor/bin/twigcs templates
+	php bin/console lint:twig src/Shared/Infrastructure/Resources/templates
+	vendor/bin/twigcs src/Shared/Infrastructure/Resources/templates
 
 phpmd:
 	vendor/bin/phpmd src/ text .phpmd.xml
