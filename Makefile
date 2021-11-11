@@ -2,8 +2,8 @@ composer:
 	composer valid
 
 twig:
-	php bin/console lint:twig templates
-	vendor/bin/twigcs templates
+	php bin/console lint:twig src/Shared/Infrastructure/Resources/templates
+	vendor/bin/twigcs src/Shared/Infrastructure/Resources/templates
 
 phpmd:
 	vendor/bin/phpmd src/ text .phpmd.xml
@@ -51,8 +51,6 @@ install:
 	sed -i -e 's/DATABASE_PASSWORD/$(db_password)/' .env.$(env).local
 	sed -i -e 's/ENV/$(env)/' .env.$(env).local
 	composer install
-	make prepare env=$(env)
 
 profile:
-	make prepare env=$(env)
 	blackfire-player run .blackfire.yaml --endpoint=$(endpoint) --blackfire-env=rse

@@ -82,6 +82,10 @@ return [
         ],
         CyclomaticComplexityIsHigh::class => [
             'maxComplexity' => 5,
+            'exclude' => [
+                'src/Shared/Infrastructure/Resources',
+                'src/Shared/Infrastructure/Kernel',
+            ]
         ],
     ],
 
