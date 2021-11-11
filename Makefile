@@ -1,5 +1,3 @@
-.PHONE: twig phpmd phpinsights phpcpd phpstan fix analyse
-
 composer:
 	composer valid
 
@@ -29,3 +27,7 @@ analyse:
 	make phpmd
 	make phpinsights
 	make phpstan
+
+.PHONY: tests
+tests:
+	php bin/phpunit
