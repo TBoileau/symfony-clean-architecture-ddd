@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Kernel;
+use App\Shared\Infrastructure\Kernel;
 
 require __DIR__.'/bootstrap.php';
 
