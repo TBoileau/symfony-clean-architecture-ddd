@@ -45,6 +45,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "behat/behat": "^3.10",
         "dama/doctrine-test-bundle": "^6.7",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsoftwig/twigcs": "^5.1",
