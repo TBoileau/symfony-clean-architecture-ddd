@@ -26,8 +26,11 @@
         <server name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
     </php>
     <testsuites>
-        <testsuite name="unit"></testsuite>
-        <testsuite name="integration"></testsuite>
+        <testsuite name="unit">
+        </testsuite>
+        <testsuite name="integration">
+            <directory>src/Security/Tests/Integration</directory>
+        </testsuite>
         <testsuite name="system"></testsuite>
         <testsuite name="e2e"></testsuite>
     </testsuites>

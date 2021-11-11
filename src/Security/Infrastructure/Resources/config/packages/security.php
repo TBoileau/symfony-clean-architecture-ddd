@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Security\Infrastructure\UserProvider\UserProvider;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Config\SecurityConfig;
 
@@ -10,7 +11,7 @@ return static function (SecurityConfig $security): void {
 
     $security->passwordHasher(PasswordAuthenticatedUserInterface::class)->algorithm('auto');
 
-    $security->provider('users_in_memory')->memory();
+    $security->provider('security_provider')->id(UserProvider::class);
 
     $security->firewall('dev')
         ->pattern('^/(_(profiler|wdt)|css|images|js)/')
@@ -18,5 +19,5 @@ return static function (SecurityConfig $security): void {
 
     $security->firewall('main')
         ->lazy(true)
-        ->provider('users_in_memory');
+        ->provider('security_provider');
 };

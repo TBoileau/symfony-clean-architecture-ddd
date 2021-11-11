@@ -39,7 +39,7 @@ final class UserFactory extends ModelFactory
     {
         return [
             'identifier' => new Identifier(Uuid::v4()),
-            'email' => new EmailAddress(self::faker()->unique()->email),
+            'email' => new EmailAddress('user+1@email.com'),
             'password' => new Password(
                 $this->userPasswordHasher->hashPassword(
                     new class() implements PasswordAuthenticatedUserInterface {

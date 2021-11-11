@@ -12,6 +12,6 @@ final class UserRepository implements UserGateway
 {
     public function getUserByEmail(string $email): ?User
     {
-        return UserFactory::createOne();
+        return UserFactory::createOne()->object();
     }
 }

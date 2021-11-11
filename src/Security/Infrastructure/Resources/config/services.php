@@ -11,18 +11,15 @@ return function (ContainerConfigurator $container) {
         ->autowire();
 
     $container
-        ->load(
-            'App\\Security\\',
-            __DIR__.'/../../../'
-        )
+        ->load('App\\Security\\', __DIR__.'/../../../')
         ->exclude([
-            '../../Resources',
+            __DIR__.'/../../Resources',
+            __DIR__.'/../../../Domain/ValueObject',
+            __DIR__.'/../../../Domain/Entity',
+            __DIR__.'/../../Model',
         ]);
 
     $container
-        ->load(
-            'App\\Security\\UserInterface\\Controller\\',
-            __DIR__.'/../../../UserInterface/Controller'
-        )
+        ->load('App\\Security\\UserInterface\\Controller\\', __DIR__.'/../../../UserInterface/Controller')
         ->tag('controller.service_arguments');
 };
