@@ -46,6 +46,7 @@
     },
     "require-dev": {
         "behat/behat": "^3.10",
+        "blackfire/php-sdk": "^1.27",
         "dama/doctrine-test-bundle": "^6.7",
         "dbrekelmans/bdi": "^1.0",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
