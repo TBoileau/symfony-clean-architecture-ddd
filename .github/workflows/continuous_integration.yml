@@ -45,9 +45,7 @@ jobs:
           BLACKFIRE_CLIENT_ID: ${{ secrets.BLACKFIRE_CLIENT_ID }}
           BLACKFIRE_CLIENT_TOKEN: ${{ secrets.BLACKFIRE_CLIENT_TOKEN }}
       - name: Install
-        run: |
-          make install db_user=root db_password=Password123! env=test
-          php bin/console doctrine:query:sql "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));" --env=test
+        run: make install db_user=root db_password=Password123! env=test
       - name: Analyze
         run: make analyse
       - name: Tests
