@@ -1,0 +1,15 @@
+tests:
+  "Pages should be fast enough":
+    path: "/.*"
+    assertions:
+      - "main.wall_time < 1s"
+      - "metrics.sql.queries.count < 10"
+
+scenarios: |
+  #!blackfire-player
+  name 'RSE'
+
+
+recommendations:
+  symfony.avoid_dot_env_parsing:
+    enabled: true
