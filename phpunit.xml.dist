@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="bin/.phpunit/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="build/phpunit.php"
 >
     <coverage processUncoveredFiles="true" cacheDirectory="var/cache/coverage">
         <include>
@@ -37,6 +37,11 @@
     <extensions>
         <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
         <extension class="Symfony\Component\Panther\ServerExtension" />
+        <extension class="\Blackfire\Bridge\PhpUnit\BlackfireBuildExtension">
+            <arguments>
+                <string>rse</string>
+            </arguments>
+        </extension>
     </extensions>
     <logging>
         <junit outputFile="var/coverage/junit.xml"/>
