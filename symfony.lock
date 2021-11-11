@@ -56,8 +56,43 @@
     "doctrine/collections": {
         "version": "1.6.8"
     },
+    "doctrine/common": {
+        "version": "3.2.0"
+    },
+    "doctrine/dbal": {
+        "version": "3.1.3"
+    },
     "doctrine/deprecations": {
         "version": "v0.5.3"
+    },
+    "doctrine/doctrine-bundle": {
+        "version": "2.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.4",
+            "ref": "032f52ed50a27762b78ca6a2aaf432958c473553"
+        },
+        "files": [
+            "config/packages/doctrine.yaml",
+            "config/packages/test/doctrine.yaml",
+            "config/packages/prod/doctrine.yaml",
+            "src/Repository/.gitignore",
+            "src/Entity/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "3.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.1",
+            "ref": "ee609429c9ee23e22d6fa5728211768f51ed2818"
+        },
+        "files": [
+            "config/packages/doctrine_migrations.yaml",
+            "migrations/.gitignore"
+        ]
     },
     "doctrine/event-manager": {
         "version": "1.1.1"
@@ -71,8 +106,17 @@
     "doctrine/lexer": {
         "version": "1.2.1"
     },
+    "doctrine/migrations": {
+        "version": "3.3.0"
+    },
+    "doctrine/orm": {
+        "version": "2.10.2"
+    },
     "doctrine/persistence": {
         "version": "2.2.3"
+    },
+    "doctrine/sql-formatter": {
+        "version": "1.1.2"
     },
     "fakerphp/faker": {
         "version": "v1.16.0"
@@ -342,6 +386,9 @@
     },
     "symfony/deprecation-contracts": {
         "version": "v2.4.0"
+    },
+    "symfony/doctrine-bridge": {
+        "version": "v5.3.8"
     },
     "symfony/dom-crawler": {
         "version": "v5.3.7"
