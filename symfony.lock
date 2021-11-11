@@ -181,6 +181,15 @@
     "phpstan/phpdoc-parser": {
         "version": "1.2.0"
     },
+    "phpstan/phpstan": {
+        "version": "1.1.2"
+    },
+    "phpstan/phpstan-doctrine": {
+        "version": "1.0.1"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "1.0.1"
+    },
     "phpunit/php-code-coverage": {
         "version": "9.2.8"
     },

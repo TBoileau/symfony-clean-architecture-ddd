@@ -1,4 +1,4 @@
-.PHONE: twig phpmd phpinsights phpcpd
+.PHONE: twig phpmd phpinsights phpcpd phpstan
 
 twig:
 	php bin/console lint:twig templates
@@ -12,6 +12,9 @@ phpinsights:
 
 phpcpd:
 	vendor/bin/phpcpd src/
+
+phpstan:
+	php vendor/bin/phpstan analyse -c phpstan.neon src --no-progress
 
 fix:
 	vendor/bin/php-cs-fixer fix
