@@ -1,4 +1,6 @@
 {
+    "name": "tboileau/rse",
+    "description": "Réseau social d'entreprise",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",

@@ -1,4 +1,7 @@
-.PHONE: twig phpmd phpinsights phpcpd phpstan
+.PHONE: twig phpmd phpinsights phpcpd phpstan fix analyse
+
+composer:
+	composer valid
 
 twig:
 	php bin/console lint:twig templates
@@ -18,3 +21,4 @@ phpstan:
 
 fix:
 	vendor/bin/php-cs-fixer fix
+
