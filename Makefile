@@ -1,5 +1,3 @@
-.PHONE: twig phpmd phpinsights phpcpd phpstan fix analyse
-
 composer:
 	composer valid
 
@@ -29,3 +27,27 @@ analyse:
 	make phpmd
 	make phpinsights
 	make phpstan
+
+.PHONY: tests
+tests:
+	php bin/phpunit
+
+fixtures:
+	php bin/console doctrine:fixtures:load -n --env=$(env)
+
+database:
+	php bin/console doctrine:database:drop --if-exists --force --env=$(env)
+	php bin/console doctrine:database:create --env=$(env)
+	php bin/console doctrine:schema:update --force --env=$(env)
+
+prepare:
+	make database env=$(env)
+	make fixtures env=$(env)
+
+install:
+	cp .env.dist .env.$(env).local
+	sed -i -e 's/DATABASE_USER/$(db_user)/' .env.$(env).local
+	sed -i -e 's/DATABASE_PASSWORD/$(db_password)/' .env.$(env).local
+	sed -i -e 's/ENV/$(env)/' .env.$(env).local
+	composer install
+	make prepare env=$(env)

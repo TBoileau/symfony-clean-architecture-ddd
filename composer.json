@@ -45,6 +45,10 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "behat/behat": "^3.10",
+        "dama/doctrine-test-bundle": "^6.7",
+        "dbrekelmans/bdi": "^1.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsoftwig/twigcs": "^5.1",
         "nunomaduro/phpinsights": "^2.0",
         "phpmd/phpmd": "^2.10",
@@ -57,6 +61,7 @@
         "symfony/css-selector": "5.3.*",
         "symfony/debug-bundle": "5.3.*",
         "symfony/maker-bundle": "^1.0",
+        "symfony/panther": "^1.1",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "5.3.*",
         "symfony/web-profiler-bundle": "5.3.*"
