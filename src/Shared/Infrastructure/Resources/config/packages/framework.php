@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 use Symfony\Config\FrameworkConfig;
 
 return static function (FrameworkConfig $framework): void {
@@ -14,8 +15,14 @@ return static function (FrameworkConfig $framework): void {
         ->log(true);
 
     $framework->session()
-        ->handlerId(null)
+        ->handlerId('session.handler.native_file')
         ->cookieSecure('auto')
         ->cookieSamesite('lax')
-        ->storageFactoryId('session.storage.factory.native');
+        ->savePath(
+            sprintf(
+                '%s/var/sessions/%s',
+                param('kernel.project_dir'),
+                param('kernel.environment')
+            )
+        );
 };

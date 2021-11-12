@@ -6,9 +6,11 @@ use NunoMaduro\PhpInsights\Domain\Insights\Composer\ComposerMustBeValid;
 use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
+use SlevomatCodingStandard\Sniffs\Classes\ForbiddenPublicPropertySniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
+use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 
 return [
     /*
@@ -75,6 +77,16 @@ return [
     ],
 
     'config' => [
+        UnusedParameterSniff::class => [
+            'exclude' => [
+                'src/Security/Infrastructure/Authenticator',
+            ],
+        ],
+        ForbiddenPublicPropertySniff::class => [
+            'exclude' => [
+                'src/Security/Domain/Entity',
+            ],
+        ],
         LineLengthSniff::class => [
             'lineLimit' => 120,
             'absoluteLineLimit' => 120,
@@ -85,7 +97,7 @@ return [
             'exclude' => [
                 'src/Shared/Infrastructure/Resources',
                 'src/Shared/Infrastructure/Kernel',
-            ]
+            ],
         ],
     ],
 

@@ -10,6 +10,9 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^2.4",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.10",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "5.3.*",
@@ -32,6 +35,7 @@
         "symfony/serializer": "5.3.*",
         "symfony/string": "5.3.*",
         "symfony/twig-bundle": "5.3.*",
+        "symfony/uid": "5.3.*",
         "symfony/validator": "5.3.*",
         "symfony/web-link": "5.3.*",
         "symfony/yaml": "5.3.*",
@@ -56,7 +60,8 @@
         "symfony/panther": "^1.1",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "5.3.*",
-        "symfony/web-profiler-bundle": "5.3.*"
+        "symfony/web-profiler-bundle": "5.3.*",
+        "zenstruck/foundry": "^1.13"
     },
     "config": {
         "optimize-autoloader": true,
