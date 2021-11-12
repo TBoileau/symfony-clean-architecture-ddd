@@ -7,9 +7,6 @@ use Symfony\Config\DoctrineMigrationsConfig;
 
 return static function (DoctrineMigrationsConfig $doctrineMigration): void {
     $doctrineMigration
-        ->migrationsPath(
-            'DoctrineMigrations',
-            sprintf('%s/migrations', param('kernel.project_dir'))
-        )
+        ->migrationsPath('DoctrineMigrations', __DIR__ . '/../../migrations')
         ->enableProfiler(param('kernel.debug'));
 };
