@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure;
 
+use App\Shared\Infrastructure\InMemory\DataFixtures\FixtureInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
@@ -50,5 +52,10 @@ final class Kernel extends BaseKernel
         $routes->import(__DIR__.'/../../**/Infrastructure/Resources/config/{routes}/*.php');
         $routes->import(__DIR__.'/../../**/Infrastructure/Resources/config/routes.php');
         $routes->import(__DIR__.'/../../**/Infrastructure/Resources/config/{routes}_'.$this->environment.'.php');
+    }
+
+    protected function build(ContainerBuilder $container): void
+    {
+        $container->registerForAutoconfiguration(FixtureInterface::class)->addTag('app.in_memory.fixtures');
     }
 }

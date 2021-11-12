@@ -5,6 +5,12 @@
     "license": "proprietary",
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/TBoileau/in-memory-bundle.git"
+        }
+    ],
     "require": {
         "php": ">=8.0.0",
         "ext-ctype": "*",
@@ -39,6 +45,7 @@
         "symfony/validator": "5.3.*",
         "symfony/web-link": "5.3.*",
         "symfony/yaml": "5.3.*",
+        "tboileau/in-memory-bundle": ">=0.1",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },

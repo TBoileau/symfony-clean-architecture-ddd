@@ -10,7 +10,8 @@
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
-            <file>src/Kernel.php</file>
+            <directory>src/Shared/Infrastructure/Resources</directory>
+            <directory>src/Security/Infrastructure/Resources</directory>
         </exclude>
         <report>
             <clover outputFile="var/coverage/clover.xml"/>
@@ -27,7 +28,6 @@
     </php>
     <testsuites>
         <testsuite name="unit">
-            <directory>src/Shared/Tests/Unit</directory>
         </testsuite>
         <testsuite name="integration">
             <directory>src/Security/Tests/Integration</directory>

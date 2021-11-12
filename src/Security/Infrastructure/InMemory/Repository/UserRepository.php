@@ -6,8 +6,8 @@ namespace App\Security\Infrastructure\InMemory\Repository;
 
 use App\Security\Domain\Entity\User;
 use App\Security\Domain\Gateway\UserGateway;
+use App\Shared\Infrastructure\InMemory\DatabaseInterface;
 use App\Shared\Infrastructure\InMemory\Repository\AbstractRepository;
-use Closure;
 
 /**
  * @method array<array-key, User> findBy(string $criterion, string|int|float|bool|null $value)
@@ -17,22 +17,13 @@ use Closure;
  */
 final class UserRepository extends AbstractRepository implements UserGateway
 {
-    public function __construct()
+    public function __construct(DatabaseInterface $database)
     {
-        parent::__construct(User::class);
+        parent::__construct($database, User::class);
     }
 
     public function getUserByEmail(string $email): ?User
     {
         return $this->findOneBy('email', $email);
-    }
-
-    /**
-     * @return iterable<string, Closure>
-     */
-    protected function registerIndexes(): iterable
-    {
-        yield 'identifier' => static fn (User $user): string => (string) $user->identifier;
-        yield 'email' => static fn (User $user): string => (string) $user->email;
     }
 }
