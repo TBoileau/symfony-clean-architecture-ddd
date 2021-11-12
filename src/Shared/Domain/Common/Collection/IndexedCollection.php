@@ -70,6 +70,30 @@ final class IndexedCollection extends ArrayCollection implements Collection
         return true;
     }
 
+    /**
+     * @param mixed $element
+     */
+    public function removeElement($element): bool
+    {
+        if (!is_object($element) || $this->class !== $element::class) {
+            throw new WrongTypeException('You cannot add element that is not the right type.');
+        }
+
+        $elementIndex = $this->indexOf($element);
+
+        foreach ($this->indexes as $index => $callback) {
+            $value = $this->getScalarValue($index, $element);
+
+            $index = array_search($elementIndex, $this->indexedElements[$index][$value]);
+
+            unset($this->indexedElements[$index][$value][$index]);
+
+            $this->indexedElements[$index][$value] = array_values($this->indexedElements[$index][$value]);
+        }
+
+        return parent::removeElement($element);
+    }
+
     public function addIndex(string $name, Closure $callback): void
     {
         if ($this->count() > 0) {
@@ -99,8 +123,8 @@ final class IndexedCollection extends ArrayCollection implements Collection
             $this->indexes,
             array_filter(
                 $this->toArray(),
-                fn (object $element, int $key): bool => in_array($key, $this->indexedElements[$index][$value]),
-                ARRAY_FILTER_USE_BOTH
+                fn (int $key): bool => in_array($key, $this->indexedElements[$index][$value]),
+                ARRAY_FILTER_USE_KEY
             )
         );
     }

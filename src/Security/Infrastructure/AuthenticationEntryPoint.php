@@ -20,7 +20,7 @@ final class AuthenticationEntryPoint implements AuthenticationEntryPointInterfac
 
     public function start(Request $request, ?AuthenticationException $authException = null): RedirectResponse
     {
-        if ($authException !== null) {
+        if (null !== $authException) {
             $request->getSession()->set(
                 Security::AUTHENTICATION_ERROR,
                 $authException->getPrevious() instanceof AccountStatusException

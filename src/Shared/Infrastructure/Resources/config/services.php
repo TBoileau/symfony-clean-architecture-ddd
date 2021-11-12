@@ -17,6 +17,7 @@ return function (ContainerConfigurator $container) {
             __DIR__.'/../../../../**/Infrastructure/Model',
             __DIR__.'/../../../../**/Domain/ValueObject',
             __DIR__.'/../../../../**/Domain/Entity',
+            __DIR__.'/../../../../**/Domain/Common',
             __DIR__.'/../../../../**/UserInterface/ViewModel',
             __DIR__.'/../../../../**/UserInterface/Controller',
             __DIR__.'/../../../../**/User.php',

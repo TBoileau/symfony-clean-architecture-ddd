@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="bin/.phpunit/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="build/phpunit.php"
+         bootstrap="src/Shared/Infrastructure/Resources/config/bootstrap.php"
 >
     <coverage processUncoveredFiles="true" cacheDirectory="var/cache/coverage">
         <include>
@@ -27,6 +27,7 @@
     </php>
     <testsuites>
         <testsuite name="unit">
+            <directory>src/Shared/Tests/Unit</directory>
         </testsuite>
         <testsuite name="integration">
             <directory>src/Security/Tests/Integration</directory>

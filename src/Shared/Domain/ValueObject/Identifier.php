@@ -18,6 +18,11 @@ final class Identifier implements Stringable
         return (string) $this->uuid;
     }
 
+    public static function create(): Identifier
+    {
+        return new self(Uuid::v4());
+    }
+
     public static function fromString(string $uuid): Identifier
     {
         return new self(Uuid::fromString($uuid));

@@ -8,9 +8,12 @@ use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
 use SlevomatCodingStandard\Sniffs\Classes\ForbiddenPublicPropertySniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
 
 return [
     /*
@@ -73,6 +76,7 @@ return [
         ComposerMustBeValid::class,
         SuperfluousAbstractClassNamingSniff::class,
         SuperfluousInterfaceNamingSniff::class,
+        SuperfluousExceptionNamingSniff::class,
         SpaceAfterNotSniff::class,
     ],
 
@@ -97,6 +101,17 @@ return [
             'exclude' => [
                 'src/Shared/Infrastructure/Resources',
                 'src/Shared/Infrastructure/Kernel',
+                'src/Shared/Domain/Common/Collection/IndexedCollection',
+            ],
+        ],
+        ParameterTypeHintSniff::class => [
+            'exclude' => [
+                'src/Shared/Domain/Common/Collection/IndexedCollection',
+            ],
+        ],
+        DisallowMixedTypeHintSniff::class => [
+            'exclude' => [
+                'src/Shared/Domain/Common/Collection/IndexedCollection',
             ],
         ],
     ],

@@ -30,6 +30,25 @@ final class IndexedCollectionTest extends TestCase
         $this->assertContains($foo1, $collection->findByIndex('bar', 'corge'));
     }
 
+    public function testIfRemoveElementIsSuccessful(): void
+    {
+        $collection = new IndexedCollection(stdClass::class);
+
+        $collection->addIndex('bar', static fn (stdClass $foo): string => $foo->bar['qux']);
+
+        $foo1 = new stdClass();
+        $foo1->bar = ['qux' => 'corge'];
+        $collection->add($foo1);
+
+        $foo2 = new stdClass();
+        $foo2->bar = ['qux' => 'grault'];
+        $collection->add($foo2);
+
+        $collection->removeElement($foo1);
+
+        $this->assertCount(0, $collection->findByIndex('bar', 'corge'));
+    }
+
     public function testIfAddNonObjectElementRaiseException(): void
     {
         $collection = new IndexedCollection(stdClass::class);
