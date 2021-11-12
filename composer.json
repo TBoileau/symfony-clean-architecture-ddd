@@ -60,8 +60,7 @@
         "symfony/panther": "^1.1",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "5.3.*",
-        "symfony/web-profiler-bundle": "5.3.*",
-        "zenstruck/foundry": "^1.13"
+        "symfony/web-profiler-bundle": "5.3.*"
     },
     "config": {
         "optimize-autoloader": true,

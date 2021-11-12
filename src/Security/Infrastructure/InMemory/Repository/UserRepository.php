@@ -6,7 +6,6 @@ namespace App\Security\Infrastructure\InMemory\Repository;
 
 use App\Security\Domain\Entity\User;
 use App\Security\Domain\Gateway\UserGateway;
-use App\Security\Infrastructure\InMemory\Factory\UserFactory;
 
 final class UserRepository implements UserGateway
 {
@@ -17,9 +16,7 @@ final class UserRepository implements UserGateway
 
     public function __construct()
     {
-        /** @var User $user */
-        $user = UserFactory::createOne()->object();
-        $this->users[(string) $user->email] = $user;
+
     }
 
     public function getUserByEmail(string $email): ?User
