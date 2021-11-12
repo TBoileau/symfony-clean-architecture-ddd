@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 use NunoMaduro\PhpInsights\Domain\Insights\Composer\ComposerMustBeValid;
 use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
+use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
 use SlevomatCodingStandard\Sniffs\Classes\ForbiddenPublicPropertySniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
+use SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
 
 return [
     /*
@@ -73,18 +78,19 @@ return [
         ComposerMustBeValid::class,
         SuperfluousAbstractClassNamingSniff::class,
         SuperfluousInterfaceNamingSniff::class,
+        SuperfluousExceptionNamingSniff::class,
         SpaceAfterNotSniff::class,
+        ForbiddenPublicPropertySniff::class,
+        DisallowMixedTypeHintSniff::class,
+        InlineDocCommentDeclarationSniff::class,
     ],
 
     'config' => [
         UnusedParameterSniff::class => [
             'exclude' => [
                 'src/Security/Infrastructure/Authenticator',
-            ],
-        ],
-        ForbiddenPublicPropertySniff::class => [
-            'exclude' => [
-                'src/Security/Domain/Entity',
+                'src/Shared/Infrastructure/InMemory/Command',
+                'src/Shared/Infrastructure/InMemory/Serializer/Normalizer',
             ],
         ],
         LineLengthSniff::class => [
@@ -92,11 +98,23 @@ return [
             'absoluteLineLimit' => 120,
             'ignoreComments' => true,
         ],
+        ForbiddenSetterSniff::class => [
+            'exclude' => [
+                'src/Security/Infrastructure/InMemory/Entity',
+            ],
+        ],
         CyclomaticComplexityIsHigh::class => [
             'maxComplexity' => 5,
             'exclude' => [
                 'src/Shared/Infrastructure/Resources',
                 'src/Shared/Infrastructure/Kernel',
+                'src/Shared/Infrastructure/InMemory/Common/Collection/IndexedCollection',
+            ],
+        ],
+        ParameterTypeHintSniff::class => [
+            'exclude' => [
+                'src/Shared/Infrastructure/InMemory/Common/Collection/IndexedCollection',
+                'src/Shared/Infrastructure/InMemory/Serializer/Normalizer',
             ],
         ],
     ],

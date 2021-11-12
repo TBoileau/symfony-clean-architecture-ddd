@@ -118,9 +118,6 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
-    "fakerphp/faker": {
-        "version": "v1.16.0"
-    },
     "friendsofphp/php-cs-fixer": {
         "version": "3.2",
         "recipe": {
@@ -688,6 +685,9 @@
     "symfony/yaml": {
         "version": "v5.3.6"
     },
+    "tboileau/in-memory-bundle": {
+        "version": "0.1"
+    },
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
@@ -699,24 +699,5 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
-    },
-    "zenstruck/assert": {
-        "version": "v1.0.0"
-    },
-    "zenstruck/callback": {
-        "version": "v1.4.1"
-    },
-    "zenstruck/foundry": {
-        "version": "1.13",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.9",
-            "ref": "26a9e6291d5fc0bfd1d673bc1d6cfe3c582c7678"
-        },
-        "files": [
-            "config/packages/test/zenstruck_foundry.yaml",
-            "config/packages/dev/zenstruck_foundry.yaml"
-        ]
     }
 }

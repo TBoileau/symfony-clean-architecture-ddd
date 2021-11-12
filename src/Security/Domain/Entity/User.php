@@ -11,11 +11,9 @@ use Serializable;
 
 final class User implements Serializable
 {
-    public Identifier $identifier;
-
-    public EmailAddress $email;
-
-    public Password $password;
+    public function __construct(public Identifier $identifier, public EmailAddress $email, public Password $password)
+    {
+    }
 
     public function serialize(): string
     {

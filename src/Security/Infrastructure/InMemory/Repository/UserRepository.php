@@ -6,24 +6,39 @@ namespace App\Security\Infrastructure\InMemory\Repository;
 
 use App\Security\Domain\Entity\User;
 use App\Security\Domain\Gateway\UserGateway;
-use App\Security\Infrastructure\InMemory\Factory\UserFactory;
+use App\Security\Domain\ValueObject\EmailAddress;
+use App\Security\Domain\ValueObject\Password;
+use App\Security\Infrastructure\InMemory\Entity\UserEntity;
+use App\Shared\Domain\ValueObject\Identifier;
+use TBoileau\InMemoryBundle\DatabaseInterface;
+use TBoileau\InMemoryBundle\Repository\AbstractRepository;
 
-final class UserRepository implements UserGateway
+/**
+ * @method array<array-key, User> findBy(string $criterion, string|int|float|bool|null $value)
+ * @method ?User            findOneBy(string $criterion, string|int|float|bool|null $value)
+ *
+ * @template-extends AbstractRepository<User>
+ */
+final class UserRepository extends AbstractRepository implements UserGateway
 {
-    /**
-     * @var array<string, User>
-     */
-    private array $users;
-
-    public function __construct()
+    public function __construct(DatabaseInterface $database)
     {
-        /** @var User $user */
-        $user = UserFactory::createOne()->object();
-        $this->users[(string) $user->email] = $user;
+        parent::__construct($database, UserEntity::class);
     }
 
     public function getUserByEmail(string $email): ?User
     {
-        return $this->users[$email] ?? null;
+        /** @var ?UserEntity $userEntity */
+        $userEntity = $this->findOneBy('email', $email);
+
+        if (null === $userEntity) {
+            return null;
+        }
+
+        return new User(
+            Identifier::fromString($userEntity->getIdentifier()),
+            new EmailAddress($userEntity->getEmail()),
+            new Password($userEntity->getPassword())
+        );
     }
 }

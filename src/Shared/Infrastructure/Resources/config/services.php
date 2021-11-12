@@ -11,14 +11,13 @@ return function (ContainerConfigurator $container) {
         ->autowire();
 
     $container
-        ->load('App\\', __DIR__.'/../../../../*')
+        ->load('App\\', __DIR__.'/../../../../')
         ->exclude([
-            __DIR__.'/../../../../**/Infrastructure/Resources',
-            __DIR__.'/../../../../**/Infrastructure/Model',
-            __DIR__.'/../../../../**/Domain/ValueObject',
-            __DIR__.'/../../../../**/Domain/Entity',
-            __DIR__.'/../../../../**/UserInterface/ViewModel',
-            __DIR__.'/../../../../**/UserInterface/Controller',
+            __DIR__.'/../../../../**/Resources',
+            __DIR__.'/../../../../**/ValueObject',
+            __DIR__.'/../../../../**/Entity',
+            __DIR__.'/../../../../**/ViewModel',
+            __DIR__.'/../../../../**/Controller',
             __DIR__.'/../../../../**/User.php',
         ]);
 };
