@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Security\Infrastructure\InMemory\Entity;
 
 use App\Security\Infrastructure\InMemory\Repository\UserRepository;
-use App\Shared\Infrastructure\InMemory\Mapping\Column;
-use App\Shared\Infrastructure\InMemory\Mapping\Entity;
+use TBoileau\InMemoryBundle\Mapping\Column;
+use TBoileau\InMemoryBundle\Mapping\Entity;
 
 #[Entity(name: 'user', repositoryClass: UserRepository::class)]
 final class UserEntity

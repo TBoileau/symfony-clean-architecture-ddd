@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8161a9d5e5004413480348b1f64fa928",
+    "content-hash": "65722aae8593b620ac3de471728c92c6",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1095,16 +1095,16 @@
         },
         {
             "name": "doctrine/migrations",
-            "version": "3.3.1",
+            "version": "3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "b4654e4de5c85d7c3ae2464c20e63b945d490928"
+                "reference": "b6e43bb5815f4dbb88c79a0fef1c669dfba52d58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/b4654e4de5c85d7c3ae2464c20e63b945d490928",
-                "reference": "b4654e4de5c85d7c3ae2464c20e63b945d490928",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/b6e43bb5815f4dbb88c79a0fef1c669dfba52d58",
+                "reference": "b6e43bb5815f4dbb88c79a0fef1c669dfba52d58",
                 "shasum": ""
             },
             "require": {
@@ -1181,7 +1181,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/migrations/issues",
-                "source": "https://github.com/doctrine/migrations/tree/3.3.1"
+                "source": "https://github.com/doctrine/migrations/tree/3.3.2"
             },
             "funding": [
                 {
@@ -1197,7 +1197,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-11T22:52:29+00:00"
+            "time": "2021-11-12T09:03:27+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -7253,6 +7253,53 @@
                 }
             ],
             "time": "2021-07-29T06:20:01+00:00"
+        },
+        {
+            "name": "tboileau/in-memory-bundle",
+            "version": "0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TBoileau/in-memory-bundle.git",
+                "reference": "56cb813094a0768ef0a1e149844cceed99c840e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TBoileau/in-memory-bundle/zipball/56cb813094a0768ef0a1e149844cceed99c840e7",
+                "reference": "56cb813094a0768ef0a1e149844cceed99c840e7",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "3.2.*",
+                "php": ">=8.0",
+                "symfony/config": "^5.3",
+                "symfony/console": "^5.3",
+                "symfony/dependency-injection": "5.3.*",
+                "symfony/filesystem": "^5.3",
+                "symfony/http-kernel": "5.3.*",
+                "symfony/property-access": "5.3.*",
+                "symfony/serializer": "5.3.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "TBoileau\\InMemoryBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "TBoileau",
+                    "email": "t-boileau@email.com"
+                }
+            ],
+            "description": "InMemoryBundle",
+            "support": {
+                "source": "https://github.com/TBoileau/in-memory-bundle/tree/0.1.4",
+                "issues": "https://github.com/TBoileau/in-memory-bundle/issues"
+            },
+            "time": "2021-11-12T18:53:41+00:00"
         },
         {
             "name": "twig/extra-bundle",

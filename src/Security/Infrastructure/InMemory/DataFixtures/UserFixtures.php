@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Security\Infrastructure\InMemory\DataFixtures;
 
 use App\Security\Infrastructure\InMemory\Entity\UserEntity;
-use App\Shared\Infrastructure\InMemory\DatabaseInterface;
-use App\Shared\Infrastructure\InMemory\DataFixtures\FixtureInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use TBoileau\InMemoryBundle\DatabaseInterface;
+use TBoileau\InMemoryBundle\DataFixtures\FixtureInterface;
 
 final class UserFixtures implements FixtureInterface
 {

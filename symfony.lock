@@ -685,6 +685,9 @@
     "symfony/yaml": {
         "version": "v5.3.6"
     },
+    "tboileau/in-memory-bundle": {
+        "version": "0.1"
+    },
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
