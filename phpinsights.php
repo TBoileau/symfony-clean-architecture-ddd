@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use NunoMaduro\PhpInsights\Domain\Insights\Composer\ComposerMustBeValid;
 use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
+use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
@@ -109,12 +110,19 @@ return [
                 'src/Shared/Infrastructure/Resources',
                 'src/Shared/Infrastructure/Kernel',
                 'src/Shared/Infrastructure/InMemory/Common/Collection/IndexedCollection',
+                'src/Shared/Domain/ValueObject/Date/Time',
             ],
         ],
         ParameterTypeHintSniff::class => [
             'exclude' => [
                 'src/Shared/Infrastructure/InMemory/Common/Collection/IndexedCollection',
                 'src/Shared/Infrastructure/InMemory/Serializer/Normalizer',
+            ],
+        ],
+        ForbiddenNormalClasses::class => [
+            'exclude' => [
+                'src/Security/Domain/ValueObject',
+                'src/Shared/Domain/ValueObject',
             ],
         ],
     ],

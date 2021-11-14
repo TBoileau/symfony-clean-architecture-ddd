@@ -45,7 +45,7 @@
         "symfony/validator": "5.3.*",
         "symfony/web-link": "5.3.*",
         "symfony/yaml": "5.3.*",
-        "tboileau/in-memory-bundle": ">=0.1",
+        "tboileau/in-memory-bundle": "^0.1",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },

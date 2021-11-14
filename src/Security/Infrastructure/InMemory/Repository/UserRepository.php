@@ -6,10 +6,10 @@ namespace App\Security\Infrastructure\InMemory\Repository;
 
 use App\Security\Domain\Entity\User;
 use App\Security\Domain\Gateway\UserGateway;
-use App\Security\Domain\ValueObject\EmailAddress;
-use App\Security\Domain\ValueObject\Password;
+use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Security\Infrastructure\InMemory\Entity\UserEntity;
-use App\Shared\Domain\ValueObject\Identifier;
+use App\Shared\Domain\ValueObject\Email\EmailAddress;
+use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
 use TBoileau\InMemoryBundle\DatabaseInterface;
 use TBoileau\InMemoryBundle\Repository\AbstractRepository;
 
@@ -36,9 +36,9 @@ final class UserRepository extends AbstractRepository implements UserGateway
         }
 
         return new User(
-            Identifier::fromString($userEntity->getIdentifier()),
-            new EmailAddress($userEntity->getEmail()),
-            new Password($userEntity->getPassword())
+            UuidIdentifier::createFromString($userEntity->getIdentifier()),
+            EmailAddress::createFromString($userEntity->getEmail()),
+            HashedPassword::createFromString($userEntity->getPassword())
         );
     }
 }
