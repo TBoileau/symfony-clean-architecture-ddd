@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace App\Security\Domain\Entity;
 
-use App\Security\Domain\ValueObject\EmailAddress;
-use App\Security\Domain\ValueObject\Password;
-use App\Shared\Domain\ValueObject\Identifier;
+use App\Security\Domain\ValueObject\Password\HashedPassword;
+use App\Shared\Domain\ValueObject\Email\EmailAddress;
+use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
 use Serializable;
 
 final class User implements Serializable
 {
-    public function __construct(public Identifier $identifier, public EmailAddress $email, public Password $password)
-    {
+    public function __construct(
+        public UuidIdentifier $identifier,
+        public EmailAddress $email,
+        public HashedPassword $password
+    ) {
     }
 
     public function serialize(): string
@@ -29,8 +32,8 @@ final class User implements Serializable
      */
     public function unserialize(mixed $data): void
     {
-        /** @var array<array-key, string> $unserializedData */
-        $unserializedData = unserialize($data, ['allowed_classes' => false]);
+        /** @var array<array-key, string> $deserializedData */
+        $deserializedData = unserialize($data, ['allowed_classes' => false]);
 
         /**
          * @var string $identifier
@@ -41,10 +44,10 @@ final class User implements Serializable
             $identifier,
             $email,
             $password,
-        ] = $unserializedData;
+        ] = $deserializedData;
 
-        $this->identifier = Identifier::fromString($identifier);
-        $this->email = new EmailAddress($email);
-        $this->password = new Password($password);
+        $this->identifier = UuidIdentifier::createFromString($identifier);
+        $this->email = EmailAddress::createFromString($email);
+        $this->password = HashedPassword::createFromString($password);
     }
 }

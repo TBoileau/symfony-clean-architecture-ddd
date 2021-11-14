@@ -11,7 +11,10 @@
         </include>
         <exclude>
             <directory>src/Shared/Infrastructure/Resources</directory>
+            <directory>src/Shared/Tests</directory>
             <directory>src/Security/Infrastructure/Resources</directory>
+            <directory>src/Security/Infrastructure/InMemory/DataFixtures</directory>
+            <directory>src/Security/Tests</directory>
         </exclude>
         <report>
             <clover outputFile="var/coverage/clover.xml"/>
@@ -28,6 +31,8 @@
     </php>
     <testsuites>
         <testsuite name="unit">
+            <directory>src/Shared/Tests</directory>
+            <directory>src/Security/Tests</directory>
         </testsuite>
         <testsuite name="integration">
             <directory>src/Security/Tests/Integration</directory>
