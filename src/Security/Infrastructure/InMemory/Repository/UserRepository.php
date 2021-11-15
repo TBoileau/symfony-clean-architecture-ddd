@@ -14,8 +14,8 @@ use TBoileau\InMemoryBundle\DatabaseInterface;
 use TBoileau\InMemoryBundle\Repository\AbstractRepository;
 
 /**
- * @method array<array-key, User> findBy(string $criterion, string|int|float|bool|null $value)
- * @method ?User            findOneBy(string $criterion, string|int|float|bool|null $value)
+ * @method array<array-key, UserProxy> findBy(string $criterion, string|int|float|bool|null $value)
+ * @method ?UserProxy       findOneBy(string $criterion, string|int|float|bool|null $value)
  *
  * @template-extends AbstractRepository<User>
  */
