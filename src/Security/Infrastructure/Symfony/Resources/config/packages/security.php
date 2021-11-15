@@ -5,13 +5,10 @@ declare(strict_types=1);
 use App\Security\Infrastructure\Symfony\Security\Authenticator\Authenticator;
 use App\Security\Infrastructure\Symfony\Security\EntryPoint\AuthenticationEntryPoint;
 use App\Security\Infrastructure\Symfony\Security\User\Provider;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Config\SecurityConfig;
 
 return static function (SecurityConfig $security): void {
     $security->enableAuthenticatorManager(true);
-
-    $security->passwordHasher(PasswordAuthenticatedUserInterface::class)->algorithm('auto');
 
     $security->provider('security_provider')->id(Provider::class);
 
