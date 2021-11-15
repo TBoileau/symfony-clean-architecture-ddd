@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Security\Infrastructure\Symfony\Security\Authenticator\Authenticator;
 use App\Security\Infrastructure\Symfony\Security\EntryPoint\AuthenticationEntryPoint;
+use App\Security\Infrastructure\Symfony\Security\User\Checker;
 use App\Security\Infrastructure\Symfony\Security\User\Provider;
 use Symfony\Config\SecurityConfig;
 
@@ -20,6 +21,7 @@ return static function (SecurityConfig $security): void {
         ->lazy(true)
         ->pattern('^/')
         ->provider('security_provider')
+        ->userChecker(Checker::class)
         ->entryPoint(AuthenticationEntryPoint::class)
         ->customAuthenticators([Authenticator::class])
         ->logout()
