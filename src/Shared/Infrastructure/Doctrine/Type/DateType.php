@@ -23,7 +23,7 @@ final class DateType extends DoctrineDateType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 
@@ -32,11 +32,11 @@ final class DateType extends DoctrineDateType
     }
 
     /**
-     * @param string $value
+     * @param ?string $value
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Date
     {
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 

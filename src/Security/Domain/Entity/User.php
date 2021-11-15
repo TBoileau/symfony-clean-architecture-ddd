@@ -35,11 +35,11 @@ class User
 
     public function isExpired(): bool
     {
-        return !($this->expiredAt === null) && $this->expiredAt->isEarlierThan(DateTime::now());
+        return !(null === $this->expiredAt) && $this->expiredAt->isEarlierThan(DateTime::now());
     }
 
     public function isSupended(): bool
     {
-        return !($this->suspendedAt === null) && $this->suspendedAt->isEarlierThan(DateTime::now());
+        return !(null === $this->suspendedAt) && $this->suspendedAt->isEarlierThan(DateTime::now());
     }
 }

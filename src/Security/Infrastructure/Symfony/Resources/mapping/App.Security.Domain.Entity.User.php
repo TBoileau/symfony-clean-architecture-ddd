@@ -26,11 +26,11 @@ $metadata->mapField([
 $metadata->mapField([
     'fieldName' => 'expiredAt',
     'type' => DateTimeType::NAME,
-    'nullable' => true
+    'nullable' => true,
 ]);
 
 $metadata->mapField([
     'fieldName' => 'suspendedAt',
     'type' => DateTimeType::NAME,
-    'nullable' => true
+    'nullable' => true,
 ]);

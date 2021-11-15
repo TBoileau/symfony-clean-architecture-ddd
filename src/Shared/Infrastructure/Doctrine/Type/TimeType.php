@@ -23,7 +23,7 @@ final class TimeType extends DoctrineTimeType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 
@@ -36,7 +36,7 @@ final class TimeType extends DoctrineTimeType
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Time
     {
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 

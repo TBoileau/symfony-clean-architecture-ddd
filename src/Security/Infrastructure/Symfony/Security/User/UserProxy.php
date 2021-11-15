@@ -60,7 +60,7 @@ final class UserProxy implements Serializable, UserInterface, PasswordAuthentica
 
         return $user->getUserIdentifier() === $this->getUserIdentifier()
             && $user->user->isSupended() !== $this->user->isSupended()
-            && $user->user->isExpired() !== $this->user->isExpired() ;
+            && $user->user->isExpired() !== $this->user->isExpired();
     }
 
     public function serialize(): string
