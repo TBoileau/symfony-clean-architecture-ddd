@@ -34,6 +34,7 @@ analyse:
 
 .PHONY: tests
 tests:
+	php bin/console cache:clear --env=test
 	vendor/bin/behat
 	php bin/phpunit --testdox
 

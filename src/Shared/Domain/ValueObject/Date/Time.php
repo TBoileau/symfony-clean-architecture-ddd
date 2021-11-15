@@ -6,10 +6,9 @@ namespace App\Shared\Domain\ValueObject\Date;
 
 use App\Shared\Domain\Exception\InvalidArgumentException;
 use DateTimeImmutable;
-use DateTimeInterface;
 use Stringable;
 
-class Time implements Stringable
+final class Time extends AbstractDateTime implements Stringable, DateTimeInterface
 {
     private function __construct(private int $hours, private int $minutes, private int $seconds)
     {
@@ -31,7 +30,7 @@ class Time implements Stringable
         return sprintf('%02d:%02d:%02d', $this->hours, $this->minutes, $this->seconds);
     }
 
-    public static function createFromDateTime(DateTimeInterface $dateTime): Time
+    public static function createFromDateTime(\DateTimeInterface $dateTime): Time
     {
         return self::create(
             intval($dateTime->format('H')),
@@ -58,7 +57,7 @@ class Time implements Stringable
         return self::createFromDateTime(new DateTimeImmutable());
     }
 
-    public function toDateTime(): DateTimeInterface
+    public function toDateTime(): \DateTimeInterface
     {
         return new DateTimeImmutable((string) $this);
     }

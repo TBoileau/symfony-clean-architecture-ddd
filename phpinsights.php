@@ -116,6 +116,7 @@ return [
             'maxComplexity' => 5,
             'exclude' => [
                 'src/Shared/Infrastructure/Symfony/Kernel',
+                'src/Shared/Infrastructure/Doctrine/DataFixtures',
                 'src/Shared/Domain/ValueObject/Date/Time',
             ],
         ],
@@ -141,7 +142,7 @@ return [
 
     'requirements' => [
         'min-quality' => 100,
-        'min-complexity' => 90,
+        'min-complexity' => 85,
         'min-architecture' => 100,
         'min-style' => 100,
         'disable-security-check' => false,

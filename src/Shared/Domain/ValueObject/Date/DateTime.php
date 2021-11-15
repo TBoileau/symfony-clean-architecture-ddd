@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Shared\Domain\ValueObject\Date;
 
 use DateTimeImmutable;
-use DateTimeInterface;
 
-class DateTime
+final class DateTime extends AbstractDateTime implements DateTimeInterface
 {
     private function __construct(private Date $date, private Time $time)
     {
@@ -34,7 +33,7 @@ class DateTime
         return new DateTime($date, $time);
     }
 
-    public static function createFromDateTime(DateTimeInterface $dateTime): DateTime
+    public static function createFromDateTime(\DateTimeInterface $dateTime): DateTime
     {
         return self::createFromDateAndTime(Date::createFromDateTime($dateTime), Time::createFromDateTime($dateTime));
     }
@@ -52,7 +51,7 @@ class DateTime
         return self::createFromDateTime(new DateTimeImmutable());
     }
 
-    public function toDateTime(): DateTimeInterface
+    public function toDateTime(): \DateTimeInterface
     {
         return new DateTimeImmutable((string) $this);
     }

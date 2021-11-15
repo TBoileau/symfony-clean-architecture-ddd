@@ -52,6 +52,42 @@ final class LoginTest extends WebTestCase
         $this->assertTrue($authorizationChecker->isGranted('ROLE_USER'));
     }
 
+    public function testIfLoginIsFailedWhenUserAccountHasExpired(): void
+    {
+        $client = static::createClient();
+
+        $client->request(Request::METHOD_GET, '/security/login');
+
+        $client->submitForm('Sign in', [
+            'email' => 'user+2@email.com',
+            'password' => 'password',
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $crawler = $client->followRedirect();
+
+        $this->assertStringContainsString('Account has expired.', $crawler->filter('div.error')->text());
+    }
+
+    public function testIfLoginIsFailedWhenUserIsSuspended(): void
+    {
+        $client = static::createClient();
+
+        $client->request(Request::METHOD_GET, '/security/login');
+
+        $client->submitForm('Sign in', [
+            'email' => 'user+3@email.com',
+            'password' => 'password',
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $crawler = $client->followRedirect();
+
+        $this->assertStringContainsString('Your user account has been suspended.', $crawler->filter('div.error')->text());
+    }
+
     /**
      * @param array{email: string, password: string} $formData
      *

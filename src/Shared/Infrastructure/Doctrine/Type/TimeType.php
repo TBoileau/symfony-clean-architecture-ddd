@@ -19,19 +19,27 @@ final class TimeType extends DoctrineTimeType
     }
 
     /**
-     * @param Time $value
+     * @param ?Time $value
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
+        if (null === $value) {
+            return null;
+        }
+
         /* @phpstan-ignore-next-line */
         return parent::convertToDatabaseValue($value->toDateTime(), $platform);
     }
 
     /**
-     * @param string $value
+     * @param ?string $value
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): Time
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?Time
     {
+        if (null === $value) {
+            return null;
+        }
+
         /** @var DateTimeInterface $dateTime */
         $dateTime = parent::convertToPHPValue($value, $platform);
 

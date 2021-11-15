@@ -54,7 +54,13 @@ final class UserProxy implements Serializable, UserInterface, PasswordAuthentica
 
     public function isEqualTo(UserInterface $user): bool
     {
-        return $user->getUserIdentifier() === $this->getUserIdentifier();
+        if (!$user instanceof UserProxy) {
+            return false;
+        }
+
+        return $user->getUserIdentifier() === $this->getUserIdentifier()
+            && $user->user->isSupended() !== $this->user->isSupended()
+            && $user->user->isExpired() !== $this->user->isExpired();
     }
 
     public function serialize(): string
