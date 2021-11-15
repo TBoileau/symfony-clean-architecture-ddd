@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\Domain\ValueObject\Password;
 
+use App\Security\Domain\PasswordHasher\PasswordHasherInterface;
 use Stringable;
 
 final class PlainPassword implements Stringable
@@ -20,5 +21,10 @@ final class PlainPassword implements Stringable
     public static function createFromString(string $plainPassword): PlainPassword
     {
         return new PlainPassword($plainPassword);
+    }
+
+    public function hash(PasswordHasherInterface $passwordHasher): HashedPassword
+    {
+        return $passwordHasher->hashPassword($this);
     }
 }

@@ -18,11 +18,9 @@ final class HashedPasswordTest extends TestCase
 
         $plainPassword = PlainPassword::createFromString('test');
 
-        $this->assertTrue($hashedPassword->verify(new class() implements PasswordHasherInterface {
-            public function verifyPassword(HashedPassword $hashedPassword, PlainPassword $plainPassword): bool
-            {
-                return (string) $hashedPassword === (string) $plainPassword;
-            }
-        }, $plainPassword));
+        $passwordHasher = $this->createMock(PasswordHasherInterface::class);
+        $passwordHasher->method('verifyPassword')->willReturn(true);
+
+        $this->assertTrue($hashedPassword->verify($passwordHasher, $plainPassword));
     }
 }

@@ -15,6 +15,11 @@ final class PasswordHasher implements PasswordHasherInterface
     {
     }
 
+    public function hashPassword(PlainPassword $plainPassword): HashedPassword
+    {
+        return HashedPassword::createFromString($this->decorated->hash((string) $plainPassword));
+    }
+
     public function verifyPassword(HashedPassword $hashedPassword, PlainPassword $plainPassword): bool
     {
         return $this->decorated->verify((string) $hashedPassword, (string) $plainPassword);
