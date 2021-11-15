@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Security\Infrastructure\AuthenticationEntryPoint;
-use App\Security\Infrastructure\Authenticator;
-use App\Security\Infrastructure\Provider;
+use App\Security\Infrastructure\Symfony\Security\Authenticator\Authenticator;
+use App\Security\Infrastructure\Symfony\Security\EntryPoint\AuthenticationEntryPoint;
+use App\Security\Infrastructure\Symfony\Security\User\Provider;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Config\SecurityConfig;
 

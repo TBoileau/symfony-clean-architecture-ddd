@@ -11,13 +11,9 @@ return function (ContainerConfigurator $container) {
         ->autowire();
 
     $container
-        ->load('App\\', __DIR__.'/../../../../')
+        ->load('App\\Shared\\', __DIR__.'/../../../../')
         ->exclude([
-            __DIR__.'/../../../../**/Resources',
-            __DIR__.'/../../../../**/ValueObject',
-            __DIR__.'/../../../../**/Entity',
-            __DIR__.'/../../../../**/ViewModel',
-            __DIR__.'/../../../../**/Controller',
-            __DIR__.'/../../../../**/User.php',
+            __DIR__.'/../',
+            __DIR__.'/../../../../Domain/ValueObject',
         ]);
 };

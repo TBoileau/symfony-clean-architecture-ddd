@@ -69,6 +69,8 @@ return [
         'build',
         'phpinsights.php',
         'src/Kernel.php',
+        'src/Shared/Infrastructure/Symfony/Resources',
+        'src/Security/Infrastructure/Symfony/Resources',
     ],
 
     'add' => [
@@ -89,9 +91,7 @@ return [
     'config' => [
         UnusedParameterSniff::class => [
             'exclude' => [
-                'src/Security/Infrastructure/Authenticator',
-                'src/Shared/Infrastructure/InMemory/Command',
-                'src/Shared/Infrastructure/InMemory/Serializer/Normalizer',
+                'src/Security/Infrastructure/Symfony/Security/Authenticator/Authenticator',
             ],
         ],
         LineLengthSniff::class => [
@@ -107,16 +107,8 @@ return [
         CyclomaticComplexityIsHigh::class => [
             'maxComplexity' => 5,
             'exclude' => [
-                'src/Shared/Infrastructure/Resources',
-                'src/Shared/Infrastructure/Kernel',
-                'src/Shared/Infrastructure/InMemory/Common/Collection/IndexedCollection',
+                'src/Shared/Infrastructure/Symfony/Kernel',
                 'src/Shared/Domain/ValueObject/Date/Time',
-            ],
-        ],
-        ParameterTypeHintSniff::class => [
-            'exclude' => [
-                'src/Shared/Infrastructure/InMemory/Common/Collection/IndexedCollection',
-                'src/Shared/Infrastructure/InMemory/Serializer/Normalizer',
             ],
         ],
         ForbiddenNormalClasses::class => [
