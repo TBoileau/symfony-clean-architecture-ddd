@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Infrastructure;
+namespace App\Security\Infrastructure\Symfony\Security\User;
 
 use App\Security\Domain\Gateway\UserGateway;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -22,7 +22,7 @@ final class Provider implements UserProviderInterface
 
     public function supportsClass(string $class): bool
     {
-        return User::class === $class;
+        return UserProxy::class === $class;
     }
 
     public function loadUserByUsername(string $username): UserInterface
@@ -38,6 +38,6 @@ final class Provider implements UserProviderInterface
             throw new UserNotFoundException();
         }
 
-        return new User($user);
+        return new UserProxy($user);
     }
 }

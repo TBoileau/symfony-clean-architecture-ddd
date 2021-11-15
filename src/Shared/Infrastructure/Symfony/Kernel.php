@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure;
+namespace App\Shared\Infrastructure\Symfony;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -20,7 +20,7 @@ final class Kernel extends BaseKernel
     public function registerBundles(): iterable
     {
         /** @var array<class-string, array<string, bool>> $contents */
-        $contents = require $this->getProjectDir().'/src/Shared/Infrastructure/Resources/config/bundles.php';
+        $contents = require $this->getProjectDir().'/src/Shared/Infrastructure/Symfony/Resources/config/bundles.php';
 
         /**
          * @var class-string        $class
@@ -37,18 +37,23 @@ final class Kernel extends BaseKernel
 
     protected function configureContainer(ContainerConfigurator $container): void
     {
-        $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/packages/*.php');
-        $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/packages/'.$this->environment.'/*.php');
-        $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/{services}.php');
-        $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/{services}.php');
-        $container->import(__DIR__.'/../../**/Infrastructure/Resources/config/{services}'.$this->environment.'.php');
+        $container->import($this->configDir().'/packages/*.php');
+        $container->import($this->configDir().'/packages/'.$this->environment.'/*.php');
+        $container->import($this->configDir().'/{services}.php');
+        $container->import($this->configDir().'/{services}.php');
+        $container->import($this->configDir().'/{services}'.$this->environment.'.php');
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $routes->import(__DIR__.'/../../**/Infrastructure/Resources/config/{routes}/'.$this->environment.'/*.php');
-        $routes->import(__DIR__.'/../../**/Infrastructure/Resources/config/{routes}/*.php');
-        $routes->import(__DIR__.'/../../**/Infrastructure/Resources/config/routes.php');
-        $routes->import(__DIR__.'/../../**/Infrastructure/Resources/config/{routes}_'.$this->environment.'.php');
+        $routes->import($this->configDir().'/{routes}/'.$this->environment.'/*.php');
+        $routes->import($this->configDir().'/{routes}/*.php');
+        $routes->import($this->configDir().'/routes.php');
+        $routes->import($this->configDir().'/{routes}_'.$this->environment.'.php');
+    }
+
+    private function configDir(): string
+    {
+        return $this->getProjectDir().'/src/**/Infrastructure/Symfony/Resources/config';
     }
 }

@@ -3,16 +3,16 @@
          xsi:noNamespaceSchemaLocation="bin/.phpunit/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="src/Shared/Infrastructure/Resources/config/bootstrap.php"
+         bootstrap="src/Shared/Infrastructure/Symfony/Resources/config/bootstrap.php"
 >
     <coverage processUncoveredFiles="true" cacheDirectory="var/cache/coverage">
         <include>
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
-            <directory>src/Shared/Infrastructure/Resources</directory>
+            <directory>src/Shared/Infrastructure/Symfony/Resources</directory>
             <directory>src/Shared/Tests</directory>
-            <directory>src/Security/Infrastructure/Resources</directory>
+            <directory>src/Security/Infrastructure/Symfony/Resources</directory>
             <directory>src/Security/Infrastructure/InMemory/DataFixtures</directory>
             <directory>src/Security/Tests</directory>
         </exclude>

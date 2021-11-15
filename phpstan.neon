@@ -4,7 +4,7 @@ includes:
 
 parameters:
     symfony:
-        container_xml_path: var/cache/dev/App_Shared_Infrastructure_KernelDevDebugContainer.xml
+        container_xml_path: var/cache/dev/App_Shared_Infrastructure_Symfony_KernelDevDebugContainer.xml
         console_application_loader: bin/console
     scanDirectories:
         - var/cache/dev/Symfony/Config
@@ -12,5 +12,6 @@ parameters:
     paths:
         - src
     excludePaths:
-        - src/Shared/Infrastructure/Resources
+        - src/Shared/Infrastructure/Symfony/Resources
+        - src/Security/Infrastructure/Symfony/Resources
 

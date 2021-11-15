@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Infrastructure;
+namespace App\Security\Infrastructure\Symfony\Security\EntryPoint;
 
+use App\Security\Infrastructure\Symfony\Security\Authenticator\Authenticator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
