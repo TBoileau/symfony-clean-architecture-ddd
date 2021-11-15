@@ -23,7 +23,7 @@ final class DateTimeType extends DoctrineDateTimeType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): string
     {
-        /** @phpstan-ignore-next-line */
+        /* @phpstan-ignore-next-line */
         return parent::convertToDatabaseValue($value->toDateTime(), $platform);
     }
 

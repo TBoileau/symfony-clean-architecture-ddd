@@ -14,7 +14,7 @@ final class UserTest extends TestCase
 {
     public function testIfUserSerializationIsSuccessful(): void
     {
-        $user = new User(
+        $user = User::create(
             UuidIdentifier::createFromString('34fd9095-de5b-45d7-b1ff-7a13cdb6066d'),
             EmailAddress::createFromString('user@email.com'),
             HashedPassword::createFromString('test')
