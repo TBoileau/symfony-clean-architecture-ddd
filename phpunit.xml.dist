@@ -34,11 +34,12 @@
             <directory>src/Shared/Tests</directory>
             <directory>src/Security/Tests</directory>
         </testsuite>
-        <testsuite name="integration">
-            <directory>src/Security/Tests/Integration</directory>
+        <testsuite name="functional">
+            <directory>src/Security/Tests/Functional</directory>
         </testsuite>
-        <testsuite name="system"></testsuite>
-        <testsuite name="e2e"></testsuite>
+        <testsuite name="e2e">
+            <directory>tests/</directory>
+        </testsuite>
     </testsuites>
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>

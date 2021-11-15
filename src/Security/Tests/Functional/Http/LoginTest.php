@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Tests\Integration\Http;
+namespace App\Security\Tests\Functional\Http;
 
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

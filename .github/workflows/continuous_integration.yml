@@ -2,7 +2,7 @@ name: RSE
 on: [push]
 jobs:
   ci:
-    name: Continuous Integration
+    name: Continuous Functional
     runs-on: ${{ matrix.operating-system }}
     strategy:
       fail-fast: false
