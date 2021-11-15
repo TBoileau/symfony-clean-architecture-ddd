@@ -17,7 +17,8 @@ class User
         public EmailAddress $email,
         public ?HashedPassword $hashedPassword = null,
         public ?PlainPassword $plainPassword = null,
-        public ?DateTime $expiredAt = null
+        public ?DateTime $expiredAt = null,
+        public ?DateTime $suspendedAt = null,
     ) {
     }
 
@@ -26,8 +27,9 @@ class User
         EmailAddress $email,
         ?HashedPassword $hashedPassword = null,
         ?PlainPassword $plainPassword = null,
-        ?DateTime $expiredAt = null
+        ?DateTime $expiredAt = null,
+        ?DateTime $suspendedAt = null
     ): User {
-        return new User($identifier, $email, $hashedPassword, $plainPassword, $expiredAt);
+        return new User($identifier, $email, $hashedPassword, $plainPassword, $expiredAt, $suspendedAt);
     }
 }
