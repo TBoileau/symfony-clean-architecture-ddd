@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Security\Infrastructure\Doctrine\Type\HashedPasswordType;
+use App\Shared\Infrastructure\Doctrine\Type\DateTimeType;
 use App\Shared\Infrastructure\Doctrine\Type\EmailAddressType;
 use App\Shared\Infrastructure\Doctrine\Type\UuidIdentifierType;
 
@@ -20,4 +21,16 @@ $metadata->mapField([
 $metadata->mapField([
     'fieldName' => 'hashedPassword',
     'type' => HashedPasswordType::NAME,
+]);
+
+$metadata->mapField([
+    'fieldName' => 'expiredAt',
+    'type' => DateTimeType::NAME,
+    'nullable' => true
+]);
+
+$metadata->mapField([
+    'fieldName' => 'suspendedAt',
+    'type' => DateTimeType::NAME,
+    'nullable' => true
 ]);

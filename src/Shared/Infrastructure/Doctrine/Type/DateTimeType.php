@@ -19,10 +19,14 @@ final class DateTimeType extends DoctrineDateTimeType
     }
 
     /**
-     * @param DateTime $value
+     * @param ?DateTime $value
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
+        if ($value === null) {
+            return null;
+        }
+
         /* @phpstan-ignore-next-line */
         return parent::convertToDatabaseValue($value->toDateTime(), $platform);
     }
@@ -30,8 +34,12 @@ final class DateTimeType extends DoctrineDateTimeType
     /**
      * @param string $value
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): DateTime
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?DateTime
     {
+        if ($value === null) {
+            return null;
+        }
+
         /** @var DateTimeInterface $dateTime */
         $dateTime = parent::convertToPHPValue($value, $platform);
 

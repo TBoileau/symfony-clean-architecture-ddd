@@ -32,4 +32,14 @@ class User
     ): User {
         return new User($identifier, $email, $hashedPassword, $plainPassword, $expiredAt, $suspendedAt);
     }
+
+    public function isExpired(): bool
+    {
+        return !($this->expiredAt === null) && $this->expiredAt->isEarlierThan(DateTime::now());
+    }
+
+    public function isSupended(): bool
+    {
+        return !($this->suspendedAt === null) && $this->suspendedAt->isEarlierThan(DateTime::now());
+    }
 }
