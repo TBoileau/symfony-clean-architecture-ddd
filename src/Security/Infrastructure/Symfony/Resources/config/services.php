@@ -15,7 +15,6 @@ return function (ContainerConfigurator $container) {
         ->autoconfigure()
         ->autowire();
 
-
     $container
         ->load('App\\Security\\', __DIR__.'/../../../../')
         ->exclude([

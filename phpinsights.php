@@ -92,6 +92,14 @@ return [
         UnusedParameterSniff::class => [
             'exclude' => [
                 'src/Security/Infrastructure/Symfony/Security/Authenticator/Authenticator',
+                'src/Security/Infrastructure/Doctrine/Type',
+                'src/Shared/Infrastructure/Doctrine/Type',
+            ],
+        ],
+        ParameterTypeHintSniff::class => [
+            'exclude' => [
+                'src/Security/Infrastructure/Doctrine/Type',
+                'src/Shared/Infrastructure/Doctrine/Type',
             ],
         ],
         LineLengthSniff::class => [
@@ -114,6 +122,7 @@ return [
         ForbiddenNormalClasses::class => [
             'exclude' => [
                 'src/Security/Domain/ValueObject',
+                'src/Security/Domain/Entity',
                 'src/Shared/Domain/ValueObject',
             ],
         ],

@@ -85,7 +85,7 @@ final class UserProxy implements Serializable, UserInterface, PasswordAuthentica
             $password,
         ] = $deserializedData;
 
-        $this->user = new User(
+        $this->user = User::create(
             UuidIdentifier::createFromString($identifier),
             EmailAddress::createFromString($email),
             HashedPassword::createFromString($password)

@@ -34,7 +34,7 @@ final class CheckCredentialsListener implements EventSubscriberInterface
         }
         /** @var User $user */
         $user = $userProxy->user;
-        if ($user->hashedPassword === null) {
+        if (null === $user->hashedPassword) {
             throw new BadCredentialsException('Invalid credentials.');
         }
         $passwordCredentials->verify($this->passwordHasher, $user->hashedPassword);
