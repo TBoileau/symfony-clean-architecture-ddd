@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security\UserInterface\Responder;
+namespace App\Security\UserInterface\Responder\Login;
 
 use App\Security\UserInterface\ViewModel\LoginViewModel;
 use Symfony\Component\HttpFoundation\Response;

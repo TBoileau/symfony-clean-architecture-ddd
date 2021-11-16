@@ -16,12 +16,9 @@ final class RequestForgottenPasswordResponder implements RequestForgottenPasswor
     {
     }
 
-    public function send(RequestForgottenPasswordViewModel $requestForgottenPasswordViewModel): Response
+    public function send(RequestForgottenPasswordViewModel $viewModel): Response
     {
-        return $this->decorated->send(
-            '@security/request_forgotten_password.html.twig',
-            $requestForgottenPasswordViewModel
-        );
+        return $this->decorated->send('@security/request_forgotten_password.html.twig', $viewModel);
     }
 
     public function redirect(): RedirectResponse
