@@ -26,4 +26,9 @@ final class UserRepository extends ServiceEntityRepository implements UserGatewa
     {
         return $this->findOneBy(['email' => $email]);
     }
+
+    public function update(User $user): void
+    {
+        $this->_em->flush($user);
+    }
 }
