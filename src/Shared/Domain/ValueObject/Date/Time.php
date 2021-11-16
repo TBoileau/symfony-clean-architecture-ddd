@@ -56,6 +56,14 @@ final class Time extends AbstractDateTime implements DateTimeInterface
         return self::createFromDateTime($dateTime->add($interval->toDateInterval()));
     }
 
+    public function sub(Interval $interval): Time
+    {
+        /** @var DateTimeImmutable $dateTime */
+        $dateTime = $this->toDateTime();
+
+        return self::createFromDateTime($dateTime->sub($interval->toDateInterval()));
+    }
+
     /**
      * @codeCoverageIgnore
      */

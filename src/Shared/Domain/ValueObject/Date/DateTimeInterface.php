@@ -21,4 +21,6 @@ interface DateTimeInterface extends Stringable
     public function isLaterThan(DateTimeInterface $date): bool;
 
     public function add(Interval $interval): DateTimeInterface;
+
+    public function sub(Interval $interval): DateTimeInterface;
 }
