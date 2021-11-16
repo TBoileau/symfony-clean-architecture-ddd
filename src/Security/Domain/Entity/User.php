@@ -9,6 +9,7 @@ use App\Security\Domain\ValueObject\Password\PlainPassword;
 use App\Shared\Domain\ValueObject\Date\DateTime;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
+use App\Shared\Domain\ValueObject\Token\UuidToken;
 
 class User
 {
@@ -19,6 +20,7 @@ class User
         public ?PlainPassword $plainPassword = null,
         public ?DateTime $expiredAt = null,
         public ?DateTime $suspendedAt = null,
+        public ?UuidToken $forgottenPasswordToken = null
     ) {
     }
 
@@ -28,9 +30,18 @@ class User
         ?HashedPassword $hashedPassword = null,
         ?PlainPassword $plainPassword = null,
         ?DateTime $expiredAt = null,
-        ?DateTime $suspendedAt = null
+        ?DateTime $suspendedAt = null,
+        ?UuidToken $forgottenPasswordToken = null
     ): User {
-        return new User($identifier, $email, $hashedPassword, $plainPassword, $expiredAt, $suspendedAt);
+        return new User(
+            $identifier,
+            $email,
+            $hashedPassword,
+            $plainPassword,
+            $expiredAt,
+            $suspendedAt,
+            $forgottenPasswordToken
+        );
     }
 
     public function isExpired(): bool

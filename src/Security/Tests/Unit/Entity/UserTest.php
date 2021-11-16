@@ -9,6 +9,7 @@ use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Shared\Domain\ValueObject\Date\DateTime;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
+use App\Shared\Domain\ValueObject\Token\UuidToken;
 use PHPUnit\Framework\TestCase;
 
 final class UserTest extends TestCase
@@ -21,8 +22,10 @@ final class UserTest extends TestCase
             hashedPassword: HashedPassword::createFromString('test'),
             expiredAt: DateTime::createFromString('2022-01-01 00:00:00'),
             suspendedAt: DateTime::createFromString('2022-01-01 00:00:00'),
+            forgottenPasswordToken: UuidToken::createFromString('34fd9095-de5b-45d7-b1ff-7a13cdb6066d'),
         );
         $this->assertEquals('34fd9095-de5b-45d7-b1ff-7a13cdb6066d', (string) $user->identifier);
+        $this->assertEquals('34fd9095-de5b-45d7-b1ff-7a13cdb6066d', (string) $user->forgottenPasswordToken);
         $this->assertEquals('user@email.com', (string) $user->email);
         $this->assertEquals('test', (string) $user->hashedPassword);
         $this->assertEquals('2022-01-01 00:00:00', (string) $user->expiredAt);
