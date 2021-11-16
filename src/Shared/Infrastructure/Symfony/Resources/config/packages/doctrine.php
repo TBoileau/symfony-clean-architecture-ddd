@@ -7,6 +7,7 @@ use App\Shared\Infrastructure\Doctrine\Type\DateType;
 use App\Shared\Infrastructure\Doctrine\Type\EmailAddressType;
 use App\Shared\Infrastructure\Doctrine\Type\TimeType;
 use App\Shared\Infrastructure\Doctrine\Type\UuidIdentifierType;
+use App\Shared\Infrastructure\Doctrine\Type\UuidTokenType;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 use Symfony\Config\DoctrineConfig;
 
@@ -20,6 +21,7 @@ return static function (DoctrineConfig $doctrine): void {
             ->namingStrategy('doctrine.orm.naming_strategy.underscore_number_aware');
 
     $doctrine->dbal()->type(UuidIdentifierType::NAME)->class(UuidIdentifierType::class);
+    $doctrine->dbal()->type(UuidTokenType::NAME)->class(UuidTokenType::class);
     $doctrine->dbal()->type(DateType::NAME)->class(DateType::class);
     $doctrine->dbal()->type(DateTimeType::NAME)->class(DateTimeType::class);
     $doctrine->dbal()->type(TimeType::NAME)->class(TimeType::class);
