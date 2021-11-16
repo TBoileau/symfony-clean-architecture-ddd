@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\ValueObject\Uuid;
 
-use App\Shared\Domain\Exception\InvalidArgumentException;
 use Stringable;
 use Symfony\Component\Uid\Uuid;
 
 abstract class AbstractUuid implements Stringable
 {
-    private function __construct(private Uuid $uuid)
+    protected function __construct(private Uuid $uuid)
     {
     }
 
@@ -19,24 +18,11 @@ abstract class AbstractUuid implements Stringable
         return (string) $this->uuid;
     }
 
-    public static function create(): AbstractUuid
-    {
-        return new static(Uuid::v4());
-    }
+    abstract public static function create(): AbstractUuid;
 
-    public static function createFromString(string $uuid): AbstractUuid
-    {
-        if (!Uuid::isValid($uuid)) {
-            throw new InvalidArgumentException(sprintf('%s is not an Uuid valid.', $uuid));
-        }
+    abstract public static function createFromString(string $uuid): AbstractUuid;
 
-        return self::createFromUuid(Uuid::fromString($uuid));
-    }
-
-    public static function createFromUuid(Uuid $uuid): AbstractUuid
-    {
-        return new static($uuid);
-    }
+    abstract public static function createFromUuid(Uuid $uuid): AbstractUuid;
 
     public function uuid(): Uuid
     {
