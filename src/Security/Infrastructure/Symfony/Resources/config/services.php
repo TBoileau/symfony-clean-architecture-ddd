@@ -21,10 +21,12 @@ return function (ContainerConfigurator $container) {
             __DIR__.'/../',
             __DIR__.'/../../../../Domain/ValueObject',
             __DIR__.'/../../../../Domain/Entity',
+            __DIR__.'/../../../../Domain/Tests',
             __DIR__.'/../../../../UserInterface/ViewModel',
             __DIR__.'/../../../../UserInterface/Controller',
             __DIR__.'/../../../../Infrastructure/Symfony/Security/User/UserProxy.php',
             __DIR__.'/../../../../Infrastructure/Symfony/Security/Authenticator/Passport/PasswordCredentials.php',
+            __DIR__.'/../../../../Infrastructure/Tests',
         ]);
 
     $container

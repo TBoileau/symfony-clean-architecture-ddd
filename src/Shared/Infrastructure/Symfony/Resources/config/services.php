@@ -15,5 +15,6 @@ return function (ContainerConfigurator $container) {
         ->exclude([
             __DIR__.'/../',
             __DIR__.'/../../../../Domain/ValueObject',
+            __DIR__.'/../../../../Domain/Tests',
         ]);
 };
