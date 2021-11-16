@@ -7,7 +7,7 @@ namespace App\Tests;
 use Blackfire\Bridge\PhpUnit\BlackfireTestCase;
 use Blackfire\Build\BuildHelper;
 
-final class UserEnd2EndTest extends BlackfireTestCase
+final class SecurityTest extends BlackfireTestCase
 {
     protected const BLACKFIRE_SCENARIO_AUTO_START = false;
 
@@ -18,7 +18,17 @@ final class UserEnd2EndTest extends BlackfireTestCase
 
         $client = static::createBlackfiredHttpBrowserClient();
 
-        $client->request('GET', '/security/login');
+        $client->request('GET', '/');
+
+        $this->assertResponseIsSuccessful();
+
+        $client->clickLink('Forgot your password ?');
+
+        $this->assertResponseIsSuccessful();
+
+        $client->submitForm('Request', [
+            'request_forgotten_password[email]' => 'user+1@email.com',
+        ]);
 
         $this->assertResponseIsSuccessful();
 
@@ -27,6 +37,10 @@ final class UserEnd2EndTest extends BlackfireTestCase
             'password' => 'password',
         ]);
 
-        $this->assertSelectorTextContains('body', 'Hello world');
+        $this->assertResponseIsSuccessful();
+
+        $client->clickLink('Logout');
+
+        $this->assertResponseIsSuccessful();
     }
 }

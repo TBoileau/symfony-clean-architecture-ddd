@@ -50,3 +50,5 @@ jobs:
         run: make analyse
       - name: Tests
         run: make tests
+      - name: Profiles
+        run: make profile
