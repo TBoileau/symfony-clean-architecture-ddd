@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\Framework\MailerConfig;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
+use Symfony\Config\FrameworkConfig;
 
-return function (MailerConfig $mailer) {
-    $mailer->dsn(env('MAILER_DSN'));
+return static function (FrameworkConfig $framework): void {
+    $framework->mailer()->dsn(env('MAILER_DSN'));
 };
