@@ -7,6 +7,7 @@ namespace App\Security\Domain\Entity;
 use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Security\Domain\ValueObject\Password\PlainPassword;
 use App\Shared\Domain\ValueObject\Date\DateTime;
+use App\Shared\Domain\ValueObject\Date\Interval;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
 use App\Shared\Domain\ValueObject\Token\UuidToken;
@@ -55,5 +56,13 @@ class User
     public function isSupended(): bool
     {
         return !(null === $this->suspendedAt) && $this->suspendedAt->isEarlierThan(DateTime::now());
+    }
+
+    public function canResetPassword(): bool
+    {
+        return !(null === $this->forgottenPasswordRequestedAt)
+            && $this->forgottenPasswordRequestedAt
+                ->add(Interval::createFromString('P1D'))
+                ->isLaterThan(DateTime::now());
     }
 }

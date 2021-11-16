@@ -14,6 +14,11 @@ final class Interval
     {
     }
 
+    public function __toString(): string
+    {
+        return $this->interval;
+    }
+
     public static function createFromString(string $interval): Interval
     {
         try {
