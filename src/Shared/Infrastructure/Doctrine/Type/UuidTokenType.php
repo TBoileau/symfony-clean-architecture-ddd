@@ -26,18 +26,26 @@ final class UuidTokenType extends Type
     }
 
     /**
-     * @param UuidToken $value
+     * @param ?UuidToken $value
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
+        if (null === $value) {
+            return null;
+        }
+
         return (string) $value;
     }
 
     /**
-     * @param string $value
+     * @param ?string $value
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): UuidToken
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?UuidToken
     {
+        if (null === $value) {
+            return null;
+        }
+
         return UuidToken::createFromString($value);
     }
 }

@@ -6,6 +6,7 @@ use App\Security\Infrastructure\Doctrine\Type\HashedPasswordType;
 use App\Shared\Infrastructure\Doctrine\Type\DateTimeType;
 use App\Shared\Infrastructure\Doctrine\Type\EmailAddressType;
 use App\Shared\Infrastructure\Doctrine\Type\UuidIdentifierType;
+use App\Shared\Infrastructure\Doctrine\Type\UuidTokenType;
 
 $metadata->mapField([
     'id' => true,
@@ -32,5 +33,17 @@ $metadata->mapField([
 $metadata->mapField([
     'fieldName' => 'suspendedAt',
     'type' => DateTimeType::NAME,
+    'nullable' => true,
+]);
+
+$metadata->mapField([
+    'fieldName' => 'forgottenPasswordRequestedAt',
+    'type' => DateTimeType::NAME,
+    'nullable' => true,
+]);
+
+$metadata->mapField([
+    'fieldName' => 'forgottenPasswordToken',
+    'type' => UuidTokenType::NAME,
     'nullable' => true,
 ]);
