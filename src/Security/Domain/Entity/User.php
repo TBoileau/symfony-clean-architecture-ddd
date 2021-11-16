@@ -20,7 +20,8 @@ class User
         public ?PlainPassword $plainPassword = null,
         public ?DateTime $expiredAt = null,
         public ?DateTime $suspendedAt = null,
-        public ?UuidToken $forgottenPasswordToken = null
+        public ?UuidToken $forgottenPasswordToken = null,
+        public ?DateTime $forgottenPasswordRequestedAt = null
     ) {
     }
 
@@ -31,7 +32,8 @@ class User
         ?PlainPassword $plainPassword = null,
         ?DateTime $expiredAt = null,
         ?DateTime $suspendedAt = null,
-        ?UuidToken $forgottenPasswordToken = null
+        ?UuidToken $forgottenPasswordToken = null,
+        ?DateTime $forgottenPasswordRequestedAt = null
     ): User {
         return new User(
             $identifier,
@@ -40,7 +42,8 @@ class User
             $plainPassword,
             $expiredAt,
             $suspendedAt,
-            $forgottenPasswordToken
+            $forgottenPasswordToken,
+            $forgottenPasswordRequestedAt
         );
     }
 

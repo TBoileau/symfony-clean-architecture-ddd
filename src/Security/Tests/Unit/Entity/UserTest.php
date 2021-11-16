@@ -23,6 +23,7 @@ final class UserTest extends TestCase
             expiredAt: DateTime::createFromString('2022-01-01 00:00:00'),
             suspendedAt: DateTime::createFromString('2022-01-01 00:00:00'),
             forgottenPasswordToken: UuidToken::createFromString('34fd9095-de5b-45d7-b1ff-7a13cdb6066d'),
+            forgottenPasswordRequestedAt: DateTime::createFromString('2022-01-01 00:00:00'),
         );
         $this->assertEquals('34fd9095-de5b-45d7-b1ff-7a13cdb6066d', (string) $user->identifier);
         $this->assertEquals('34fd9095-de5b-45d7-b1ff-7a13cdb6066d', (string) $user->forgottenPasswordToken);
@@ -30,5 +31,6 @@ final class UserTest extends TestCase
         $this->assertEquals('test', (string) $user->hashedPassword);
         $this->assertEquals('2022-01-01 00:00:00', (string) $user->expiredAt);
         $this->assertEquals('2022-01-01 00:00:00', (string) $user->suspendedAt);
+        $this->assertEquals('2022-01-01 00:00:00', (string) $user->forgottenPasswordRequestedAt);
     }
 }
