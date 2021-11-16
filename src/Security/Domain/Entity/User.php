@@ -65,4 +65,10 @@ class User
                 ->add(Interval::createFromString('P1D'))
                 ->isLaterThan(DateTime::now());
     }
+
+    public function requestForAForgottenPassword(): void
+    {
+        $this->forgottenPasswordRequestedAt = DateTime::now();
+        $this->forgottenPasswordToken = UuidToken::create();
+    }
 }

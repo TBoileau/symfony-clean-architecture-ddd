@@ -41,5 +41,8 @@ final class UserTest extends TestCase
 
         $user->forgottenPasswordRequestedAt = DateTime::createFromDateTime(new DateTimeImmutable('2 days ago'));
         $this->assertFalse($user->canResetPassword());
+
+        $user->requestForAForgottenPassword();
+        $this->assertTrue($user->canResetPassword());
     }
 }
