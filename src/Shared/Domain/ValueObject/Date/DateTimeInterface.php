@@ -15,4 +15,6 @@ interface DateTimeInterface
     public function toDateTime(): \DateTimeInterface;
 
     public function isEarlierThan(DateTimeInterface $date): bool;
+
+    public function isLaterThan(DateTimeInterface $date): bool;
 }

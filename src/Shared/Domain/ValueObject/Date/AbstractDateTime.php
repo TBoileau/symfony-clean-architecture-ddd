@@ -10,4 +10,9 @@ abstract class AbstractDateTime implements DateTimeInterface
     {
         return $this->toDateTime() < $date->toDateTime();
     }
+
+    public function isLaterThan(DateTimeInterface $date): bool
+    {
+        return $this->toDateTime() > $date->toDateTime();
+    }
 }

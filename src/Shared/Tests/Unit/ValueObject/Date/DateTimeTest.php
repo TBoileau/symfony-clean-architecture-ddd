@@ -63,5 +63,7 @@ final class DateTimeTest extends TestCase
         $this->assertEquals(45, $dateTime->time()->seconds());
         $this->assertEquals('2021-12-15 12:30:45', (string) $dateTime);
         $this->assertInstanceOf(DateTimeInterface::class, $dateTime->toDateTime());
+        $this->assertTrue($dateTime->isLaterThan(DateTime::createFromString('2020-01-01')));
+        $this->assertTrue($dateTime->isEarlierThan(DateTime::createFromString('2022-01-01')));
     }
 }
