@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Tests\Unit\ValueObject\Token;
+namespace App\Shared\Domain\Tests\Unit\ValueObject\Identifier;
 
 use App\Shared\Domain\Exception\InvalidArgumentException;
-use App\Shared\Domain\ValueObject\Token\UuidToken;
+use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 
-final class UuidTokenTest extends TestCase
+final class UuidIdentifierTest extends TestCase
 {
-    public function testIfFactoriesCreateToken(): void
+    public function testIfFactoriesCreateIdentifier(): void
     {
-        $identifier = UuidToken::create();
+        $identifier = UuidIdentifier::create();
         $this->assertTrue(Uuid::isValid((string) $identifier));
         $this->assertInstanceOf(Uuid::class, $identifier->uuid());
 
-        $identifier = UuidToken::createFromString((string) Uuid::v4());
+        $identifier = UuidIdentifier::createFromString((string) Uuid::v4());
         $this->assertTrue(Uuid::isValid((string) $identifier));
         $this->assertInstanceOf(Uuid::class, $identifier->uuid());
 
-        $identifier = UuidToken::createFromUuid(Uuid::v4());
+        $identifier = UuidIdentifier::createFromUuid(Uuid::v4());
         $this->assertTrue(Uuid::isValid((string) $identifier));
         $this->assertInstanceOf(Uuid::class, $identifier->uuid());
     }
@@ -29,6 +29,6 @@ final class UuidTokenTest extends TestCase
     public function testIfUuidIsInvalid(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        UuidToken::createFromString('fail');
+        UuidIdentifier::createFromString('fail');
     }
 }

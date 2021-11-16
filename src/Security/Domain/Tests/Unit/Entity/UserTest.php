@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Tests\Unit\Entity;
+namespace App\Security\Domain\Tests\Unit\Entity;
 
 use App\Security\Domain\Entity\User;
 use App\Security\Domain\ValueObject\Password\HashedPassword;

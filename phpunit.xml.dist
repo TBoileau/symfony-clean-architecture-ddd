@@ -11,10 +11,12 @@
         </include>
         <exclude>
             <directory>src/Shared/Infrastructure/Symfony/Resources</directory>
-            <directory>src/Shared/Tests</directory>
+            <directory>src/Shared/Infrastructure/Tests</directory>
+            <directory>src/Shared/Domain/Tests</directory>
+            <directory>src/Security/Infrastructure/Doctrine/DataFixtures</directory>
             <directory>src/Security/Infrastructure/Symfony/Resources</directory>
-            <directory>src/Security/Infrastructure/InMemory/DataFixtures</directory>
-            <directory>src/Security/Tests</directory>
+            <directory>src/Security/Infrastructure/Tests</directory>
+            <directory>src/Security/Domain/Tests</directory>
         </exclude>
         <report>
             <clover outputFile="var/coverage/clover.xml"/>
@@ -31,11 +33,11 @@
     </php>
     <testsuites>
         <testsuite name="unit">
-            <directory>src/Shared/Tests</directory>
-            <directory>src/Security/Tests</directory>
+            <directory>src/Shared/Domain/Tests/Unit</directory>
+            <directory>src/Security/Domain/Tests/Unit</directory>
         </testsuite>
         <testsuite name="functional">
-            <directory>src/Security/Tests/Functional</directory>
+            <directory>src/Security/Infrastructure/Tests</directory>
         </testsuite>
         <testsuite name="e2e">
             <directory>tests/</directory>
