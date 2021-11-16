@@ -7,6 +7,7 @@ namespace App\Security\Domain\Tests\Acceptance\Context;
 use App\Security\Domain\Entity\User;
 use App\Security\Domain\Tests\Fixtures\Infrastructure\Repository\UserRepository;
 use App\Security\Domain\Tests\Fixtures\UserInterface\Input\RequestForgottenPasswordInput;
+use App\Security\Domain\Tests\Fixtures\UserInterface\Presenter\RequestForgottenPasswordPresenter;
 use App\Security\Domain\UseCase\RequestForgottenPassword\RequestForgottenPassword;
 use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Shared\Domain\ValueObject\Date\DateTime;
@@ -65,7 +66,7 @@ final class RequestForgottenPasswordContext implements Context
 
         $useCase = new RequestForgottenPassword($userGateway);
 
-        $useCase(new RequestForgottenPasswordInput($this->email));
+        $useCase(new RequestForgottenPasswordInput($this->email), new RequestForgottenPasswordPresenter());
 
         Assert::assertNotNull($this->registeredUser->forgottenPasswordRequestedAt);
         Assert::assertNotNull($this->registeredUser->forgottenPasswordToken);
@@ -82,7 +83,7 @@ final class RequestForgottenPasswordContext implements Context
         $useCase = new RequestForgottenPassword($userGateway);
 
         try {
-            $useCase(new RequestForgottenPasswordInput($this->email));
+            $useCase(new RequestForgottenPasswordInput($this->email), new RequestForgottenPasswordPresenter());
         } catch (InvalidArgumentException $exception) {
             Assert::assertEquals($errorMessage, $exception->getMessage());
         }

@@ -16,7 +16,7 @@ final class UserRepository implements UserGateway
     /**
      * @param array<int, User> $users
      */
-    public function __construct(private array $users)
+    public function __construct(public array $users)
     {
     }
 
