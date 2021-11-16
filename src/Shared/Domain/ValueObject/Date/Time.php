@@ -6,9 +6,8 @@ namespace App\Shared\Domain\ValueObject\Date;
 
 use App\Shared\Domain\Exception\InvalidArgumentException;
 use DateTimeImmutable;
-use Stringable;
 
-final class Time extends AbstractDateTime implements Stringable, DateTimeInterface
+final class Time extends AbstractDateTime implements DateTimeInterface
 {
     private function __construct(private int $hours, private int $minutes, private int $seconds)
     {

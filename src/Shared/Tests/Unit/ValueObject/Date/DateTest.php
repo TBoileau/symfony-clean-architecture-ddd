@@ -6,6 +6,7 @@ namespace App\Shared\Tests\Unit\ValueObject\Date;
 
 use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Shared\Domain\ValueObject\Date\Date;
+use App\Shared\Domain\ValueObject\Date\Interval;
 use DateTime;
 use DateTimeInterface;
 use Generator;
@@ -47,5 +48,7 @@ final class DateTest extends TestCase
         $this->assertInstanceOf(DateTimeInterface::class, $date->toDateTime());
         $this->assertTrue($date->isLaterThan(Date::createFromString('2020-01-01')));
         $this->assertTrue($date->isEarlierThan(Date::createFromString('2022-01-01')));
+        $newDate = $date->add(Interval::createFromString('P1D'));
+        $this->assertEquals('2021-12-16', (string) $newDate);
     }
 }

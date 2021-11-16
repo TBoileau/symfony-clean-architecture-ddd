@@ -6,6 +6,7 @@ namespace App\Shared\Tests\Unit\ValueObject\Date;
 
 use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Shared\Domain\ValueObject\Date\DateTime;
+use App\Shared\Domain\ValueObject\Date\Interval;
 use App\Shared\Domain\ValueObject\Date\Time;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -49,5 +50,7 @@ final class TimeTest extends TestCase
         $this->assertInstanceOf(DateTimeInterface::class, $time->toDateTime());
         $this->assertTrue($time->isLaterThan(DateTime::createFromString('10:00:00')));
         $this->assertTrue($time->isEarlierThan(DateTime::createFromString('14:00:00')));
+        $newTime = $time->add(Interval::createFromString('PT1H'));
+        $this->assertEquals('13:30:45', (string) $newTime);
     }
 }
