@@ -23,7 +23,7 @@ final class RequestForgottenPasswordController
         FormFactoryInterface $formFactory,
         RequestForgottenPasswordResponderInterface $responder,
         RequestForgottenPasswordPresenterInterface $presenter,
-        RequestForgottenPasswordInterface $useCase
+        RequestForgottenPasswordInterface $useCase,
     ): Response {
         $input = new RequestForgottenPasswordInput();
 

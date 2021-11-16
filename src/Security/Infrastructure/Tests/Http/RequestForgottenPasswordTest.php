@@ -38,6 +38,31 @@ final class RequestForgottenPasswordTest extends WebTestCase
         $this->assertTrue($user->canResetPassword());
     }
 
+    /**
+     * @dataProvider provideFailedEmail
+     */
+    public function testIfRequestForgottenPasswordIsFailed(string $email): void
+    {
+        $client = static::createClient();
+
+        $client->request(Request::METHOD_GET, '/security/request-forgotten-password');
+
+        $client->submitForm('Request', [
+            'request_forgotten_password[email]' => $email,
+        ]);
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+    }
+
+    /**
+     * @return iterable<string, array<array-key, string>>
+     */
+    public function provideFailedEmail(): iterable
+    {
+        yield 'empty email' => [''];
+        yield 'inavlid email' => ['fail'];
+    }
+
     public function testIfRequestForgottenPasswordIsFailedBecauseNonExistingEmail(): void
     {
         $client = static::createClient();
