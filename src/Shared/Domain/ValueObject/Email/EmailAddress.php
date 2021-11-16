@@ -27,4 +27,9 @@ class EmailAddress implements Stringable
     {
         return new EmailAddress($email);
     }
+
+    public function equalTo(EmailAddress $email): bool
+    {
+        return (string) $email === (string) $this;
+    }
 }

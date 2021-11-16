@@ -36,7 +36,12 @@ analyse:
 tests:
 	php bin/console cache:clear --env=test
 	vendor/bin/behat
-	php bin/phpunit --testdox
+	php bin/phpunit --testdox --testsuite=unit,functional
+
+profile:
+	php bin/console cache:clear --env=test
+	make prepare env=test
+	php bin/phpunit --testdox --testsuite=e2e
 
 database:
 	php bin/console doctrine:database:drop --if-exists --force --env=$(env)
@@ -58,6 +63,3 @@ install:
 	sed -i -e 's/ENV/$(env)/' .env.$(env).local
 	composer install
 	make prepare env=$(env)
-
-profile:
-	blackfire-player run .blackfire.yaml --endpoint=$(endpoint) --blackfire-env=rse

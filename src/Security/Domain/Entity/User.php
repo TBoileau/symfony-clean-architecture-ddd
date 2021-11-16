@@ -7,8 +7,10 @@ namespace App\Security\Domain\Entity;
 use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Security\Domain\ValueObject\Password\PlainPassword;
 use App\Shared\Domain\ValueObject\Date\DateTime;
+use App\Shared\Domain\ValueObject\Date\Interval;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
+use App\Shared\Domain\ValueObject\Token\UuidToken;
 
 class User
 {
@@ -19,6 +21,8 @@ class User
         public ?PlainPassword $plainPassword = null,
         public ?DateTime $expiredAt = null,
         public ?DateTime $suspendedAt = null,
+        public ?UuidToken $forgottenPasswordToken = null,
+        public ?DateTime $forgottenPasswordRequestedAt = null
     ) {
     }
 
@@ -28,9 +32,20 @@ class User
         ?HashedPassword $hashedPassword = null,
         ?PlainPassword $plainPassword = null,
         ?DateTime $expiredAt = null,
-        ?DateTime $suspendedAt = null
+        ?DateTime $suspendedAt = null,
+        ?UuidToken $forgottenPasswordToken = null,
+        ?DateTime $forgottenPasswordRequestedAt = null
     ): User {
-        return new User($identifier, $email, $hashedPassword, $plainPassword, $expiredAt, $suspendedAt);
+        return new User(
+            $identifier,
+            $email,
+            $hashedPassword,
+            $plainPassword,
+            $expiredAt,
+            $suspendedAt,
+            $forgottenPasswordToken,
+            $forgottenPasswordRequestedAt
+        );
     }
 
     public function isExpired(): bool
@@ -41,5 +56,19 @@ class User
     public function isSupended(): bool
     {
         return !(null === $this->suspendedAt) && $this->suspendedAt->isEarlierThan(DateTime::now());
+    }
+
+    public function canResetPassword(): bool
+    {
+        return !(null === $this->forgottenPasswordRequestedAt)
+            && $this->forgottenPasswordRequestedAt
+                ->add(Interval::createFromString('P1D'))
+                ->isLaterThan(DateTime::now());
+    }
+
+    public function requestForAForgottenPassword(): void
+    {
+        $this->forgottenPasswordRequestedAt = DateTime::now();
+        $this->forgottenPasswordToken = UuidToken::create();
     }
 }

@@ -13,4 +13,6 @@ use App\Shared\Domain\ValueObject\Email\EmailAddress;
 interface UserGateway
 {
     public function getUserByEmail(EmailAddress $email): ?User;
+
+    public function update(User $user): void;
 }

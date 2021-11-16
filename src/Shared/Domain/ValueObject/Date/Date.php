@@ -6,9 +6,8 @@ namespace App\Shared\Domain\ValueObject\Date;
 
 use App\Shared\Domain\Exception\InvalidArgumentException;
 use DateTimeImmutable;
-use Stringable;
 
-final class Date extends AbstractDateTime implements Stringable, DateTimeInterface
+final class Date extends AbstractDateTime implements DateTimeInterface
 {
     private function __construct(private int $year, private int $month, private int $day)
     {
@@ -51,6 +50,22 @@ final class Date extends AbstractDateTime implements Stringable, DateTimeInterfa
     public static function now(): Date
     {
         return self::createFromDateTime(new DateTimeImmutable());
+    }
+
+    public function add(Interval $interval): Date
+    {
+        /** @var DateTimeImmutable $dateTime */
+        $dateTime = $this->toDateTime();
+
+        return self::createFromDateTime($dateTime->add($interval->toDateInterval()));
+    }
+
+    public function sub(Interval $interval): Date
+    {
+        /** @var DateTimeImmutable $dateTime */
+        $dateTime = $this->toDateTime();
+
+        return self::createFromDateTime($dateTime->sub($interval->toDateInterval()));
     }
 
     public function toDateTime(): \DateTimeInterface

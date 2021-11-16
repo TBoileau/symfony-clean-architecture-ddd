@@ -17,19 +17,24 @@
         <exclude name="LongVariable" />
         <exclude name="ShortVariable" />
         <exclude name="ShortMethodName" />
+        <exclude name="LongClassName" />
     </rule>
 
     <rule ref="rulesets/naming.xml/ShortVariable">
-        <priority>1</priority>
         <properties>
             <property name="minimum" value="2" /><!-- Default: 3 -->
         </properties>
     </rule>
 
     <rule ref="rulesets/naming.xml/LongVariable">
-        <priority>2</priority>
         <properties>
-            <property name="maximum" value="20" /><!-- Default: 20 -->
+            <property name="maximum" value="30" /><!-- Default: 20 -->
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/naming.xml/LongClassName">
+        <properties>
+            <property name="maximum" value="50" /><!-- Default: 20 -->
         </properties>
     </rule>
 </ruleset>

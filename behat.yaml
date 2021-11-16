@@ -1,2 +1,7 @@
 default:
   suites:
+    security:
+      contexts:
+        - 'App\Security\Domain\Tests\Acceptance\Context\RequestForgottenPasswordContext'
+      paths:
+        - '%paths.base%/src/Security/Domain/Tests/Acceptance'
