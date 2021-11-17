@@ -52,5 +52,7 @@ final class TimeTest extends TestCase
         $this->assertTrue($time->isEarlierThan(DateTime::createFromString('14:00:00')));
         $newTime = $time->add(Interval::createFromString('PT1H'));
         $this->assertEquals('13:30:45', (string) $newTime);
+        $newTime = $time->sub(Interval::createFromString('PT1H'));
+        $this->assertEquals('11:30:45', (string) $newTime);
     }
 }

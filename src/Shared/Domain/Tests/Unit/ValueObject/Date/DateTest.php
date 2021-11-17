@@ -50,5 +50,7 @@ final class DateTest extends TestCase
         $this->assertTrue($date->isEarlierThan(Date::createFromString('2022-01-01')));
         $newDate = $date->add(Interval::createFromString('P1D'));
         $this->assertEquals('2021-12-16', (string) $newDate);
+        $newDate = $date->sub(Interval::createFromString('P1D'));
+        $this->assertEquals('2021-12-14', (string) $newDate);
     }
 }
