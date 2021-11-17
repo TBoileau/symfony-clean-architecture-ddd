@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Security\Domain\Tests\Unit\Entity;
 
 use App\Security\Domain\Entity\User;
+use App\Security\Domain\Tests\Fixtures\Infrastructure\Security\PasswordHasher;
 use App\Security\Domain\ValueObject\Password\HashedPassword;
+use App\Security\Domain\ValueObject\Password\PlainPassword;
+use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Shared\Domain\ValueObject\Date\DateTime;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
@@ -44,5 +47,14 @@ final class UserTest extends TestCase
 
         $user->requestForAForgottenPassword();
         $this->assertTrue($user->canResetPassword());
+
+        $user->plainPassword = PlainPassword::createFromString('new_password');
+        $user->resetPassword(new PasswordHasher());
+        $this->assertFalse($user->canResetPassword());
+        $this->assertNull($user->forgottenPasswordToken);
+        $this->assertNull($user->forgottenPasswordRequestedAt);
+
+        $this->expectException(InvalidArgumentException::class);
+        $user->resetPassword(new PasswordHasher());
     }
 }

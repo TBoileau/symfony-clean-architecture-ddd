@@ -23,7 +23,10 @@ final class UserParamConverter implements ParamConverterInterface
     public function apply(Request $request, ParamConverter $configuration): bool
     {
         if ($request->attributes->has('token')) {
-            $token = UuidToken::createFromString($request->attributes->getAlpha('token'));
+            /** @var string $token */
+            $token = $request->attributes->get('token');
+
+            $token = UuidToken::createFromString($token);
 
             $user = $this->userGateway->getUserByForgottenPasswordToken($token);
 

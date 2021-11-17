@@ -7,7 +7,6 @@ namespace App\Security\Domain\UseCase\ResetPassword;
 use App\Security\Domain\Contract\Gateway\UserGateway;
 use App\Security\Domain\Contract\Security\PasswordHasher\PasswordHasherInterface;
 use App\Security\Domain\Entity\User;
-use App\Shared\Domain\Exception\InvalidArgumentException;
 
 final class ResetPassword implements ResetPasswordInterface
 {
@@ -18,9 +17,6 @@ final class ResetPassword implements ResetPasswordInterface
     {
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     public function __invoke(ResetPasswordInputInterface $input): void
     {
         $user = $input->user();

@@ -23,6 +23,6 @@ final class ResetPasswordResponder implements ResetPasswordResponderInterface
 
     public function redirect(): RedirectResponse
     {
-        return new RedirectResponse($this->urlGenerator->generate(''));
+        return new RedirectResponse($this->urlGenerator->generate('security_login'));
     }
 }
