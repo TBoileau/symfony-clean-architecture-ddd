@@ -2,7 +2,7 @@ Feature: As a user I want to request a forgotten password In order to reset my p
   Scenario: Should create a forgotten password token for the next 24 hours
     Given I registered with my email address user+1@email.com
     When I request a forgotten password with user+1@email.com
-    Then then I can use my forgotten password token for the next 24 hours
+    Then I can use my forgotten password token for the next 24 hours
   Scenario: Should not create a forgotten password token because of a non-existing email
     Given I registered with my email address user+1@email.com
     When I request a forgotten password with user+0@email.com

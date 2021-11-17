@@ -68,5 +68,7 @@ final class DateTimeTest extends TestCase
         $this->assertTrue($dateTime->isEarlierThan(DateTime::createFromString('2022-01-01')));
         $newDateTime = $dateTime->add(Interval::createFromString('P1D'));
         $this->assertEquals('2021-12-16 12:30:45', (string) $newDateTime);
+        $newDateTime = $dateTime->sub(Interval::createFromString('P1D'));
+        $this->assertEquals('2021-12-14 12:30:45', (string) $newDateTime);
     }
 }

@@ -13,17 +13,20 @@ final class UuidTokenTest extends TestCase
 {
     public function testIfFactoriesCreateToken(): void
     {
-        $identifier = UuidToken::create();
-        $this->assertTrue(Uuid::isValid((string) $identifier));
-        $this->assertInstanceOf(Uuid::class, $identifier->uuid());
+        $token = UuidToken::create();
+        $this->assertTrue(Uuid::isValid((string) $token));
+        $this->assertInstanceOf(Uuid::class, $token->uuid());
 
-        $identifier = UuidToken::createFromString((string) Uuid::v4());
-        $this->assertTrue(Uuid::isValid((string) $identifier));
-        $this->assertInstanceOf(Uuid::class, $identifier->uuid());
+        $token = UuidToken::createFromString((string) Uuid::v4());
+        $this->assertTrue(Uuid::isValid((string) $token));
+        $this->assertInstanceOf(Uuid::class, $token->uuid());
 
-        $identifier = UuidToken::createFromUuid(Uuid::v4());
-        $this->assertTrue(Uuid::isValid((string) $identifier));
-        $this->assertInstanceOf(Uuid::class, $identifier->uuid());
+        $uuid = Uuid::v4();
+
+        $token = UuidToken::createFromUuid($uuid);
+        $this->assertTrue(Uuid::isValid((string) $token));
+        $this->assertInstanceOf(Uuid::class, $token->uuid());
+        $this->assertTrue($token->equalTo(UuidToken::createFromUuid($uuid)));
     }
 
     public function testIfUuidIsInvalid(): void

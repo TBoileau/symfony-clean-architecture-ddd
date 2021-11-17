@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security\Domain\UseCase\RequestForgottenPassword;
 
+use App\Security\Domain\Contract\Gateway\UserGateway;
 use App\Security\Domain\Entity\User;
-use App\Security\Domain\Gateway\UserGateway;
 use App\Shared\Domain\Exception\InvalidArgumentException;
 
 final class RequestForgottenPassword implements RequestForgottenPasswordInterface

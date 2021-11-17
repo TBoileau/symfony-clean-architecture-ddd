@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security\Infrastructure\Symfony\Security\User;
 
+use App\Security\Domain\Contract\Gateway\UserGateway;
 use App\Security\Domain\Entity\User;
-use App\Security\Domain\Gateway\UserGateway;
 use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;

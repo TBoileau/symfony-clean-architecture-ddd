@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\Domain\ValueObject\Password;
 
-use App\Security\Domain\PasswordHasher\PasswordHasherInterface;
+use App\Security\Domain\Contract\Security\PasswordHasher\PasswordHasherInterface;
 use Stringable;
 
 final class PlainPassword implements Stringable

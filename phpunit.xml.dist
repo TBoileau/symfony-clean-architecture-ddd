@@ -12,6 +12,7 @@
         <exclude>
             <directory>src/Shared/Infrastructure/Symfony/Resources</directory>
             <directory>src/Shared/Infrastructure/Tests</directory>
+            <directory>src/Shared/Infrastructure/Symfony/Maker</directory>
             <directory>src/Shared/Domain/Tests</directory>
             <directory>src/Security/Infrastructure/Doctrine/DataFixtures</directory>
             <directory>src/Security/Infrastructure/Symfony/Resources</directory>

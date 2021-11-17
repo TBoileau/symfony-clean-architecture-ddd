@@ -6,9 +6,14 @@ namespace App\Security\Domain\Tests\Acceptance\Context;
 
 use App\Security\Domain\Entity\User;
 use App\Security\Domain\Tests\Fixtures\Infrastructure\Repository\UserRepository;
+use App\Security\Domain\Tests\Fixtures\Infrastructure\Security\PasswordHasher;
 use App\Security\Domain\Tests\Fixtures\UserInterface\Input\RequestForgottenPasswordInput;
+use App\Security\Domain\Tests\Fixtures\UserInterface\Input\ResetPasswordInput;
 use App\Security\Domain\Tests\Fixtures\UserInterface\Presenter\RequestForgottenPasswordPresenter;
 use App\Security\Domain\UseCase\RequestForgottenPassword\RequestForgottenPassword;
+use App\Security\Domain\UseCase\ResetPassword\ResetPassword;
+use App\Security\Domain\ValueObject\Password\HashedPassword;
+use App\Security\Domain\ValueObject\Password\PlainPassword;
 use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Shared\Domain\ValueObject\Date\DateTime;
 use App\Shared\Domain\ValueObject\Date\Interval;
@@ -17,11 +22,13 @@ use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
 use Behat\Behat\Context\Context;
 use PHPUnit\Framework\Assert;
 
-final class RequestForgottenPasswordContext implements Context
+final class SecurityContext implements Context
 {
     private User $registeredUser;
 
     private string $email;
+
+    private string $plainPassword;
 
     /**
      * @Given /^I registered with my email address (.+)$/
@@ -50,6 +57,22 @@ final class RequestForgottenPasswordContext implements Context
     }
 
     /**
+     * @Given /^I request a forgotten password$/
+     */
+    public function iRequestAForgottenPassword(): void
+    {
+        $this->registeredUser->requestForAForgottenPassword();
+    }
+
+    /**
+     * @When /^I reset my password with (.+)/
+     */
+    public function iResetMyPasswordWith(string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
      * @When /^I request a forgotten password with (.+)$/
      */
     public function iRequestAForgottenPasswordWith(string $email): void
@@ -58,7 +81,7 @@ final class RequestForgottenPasswordContext implements Context
     }
 
     /**
-     * @Then /^then I can use my forgotten password token for the next 24 hours$/
+     * @Then /^I can use my forgotten password token for the next 24 hours$/
      */
     public function thenICanUseMyForgottenPasswordTokenForTheNextHours(): void
     {
@@ -87,5 +110,33 @@ final class RequestForgottenPasswordContext implements Context
         } catch (InvalidArgumentException $exception) {
             Assert::assertEquals($errorMessage, $exception->getMessage());
         }
+    }
+
+    /**
+     * @Then /^My password is reset and I can log in again$/
+     */
+    public function myPasswordIsResetAndICanLogInAgain(): void
+    {
+        $userGateway = new UserRepository([$this->registeredUser]);
+
+        $passwordHasher = new PasswordHasher();
+
+        $useCase = new ResetPassword($userGateway, $passwordHasher);
+
+        $useCase(new ResetPasswordInput($this->plainPassword, $this->registeredUser));
+
+        Assert::assertNull($this->registeredUser->forgottenPasswordRequestedAt);
+        Assert::assertNull($this->registeredUser->forgottenPasswordToken);
+        Assert::assertNull($this->registeredUser->plainPassword);
+        Assert::assertFalse($this->registeredUser->canResetPassword());
+
+        /** @var HashedPassword $hashedPassword */
+        $hashedPassword = $this->registeredUser->hashedPassword;
+        Assert::assertTrue(
+            $hashedPassword->verify(
+                $passwordHasher,
+                PlainPassword::createFromString($this->plainPassword)
+            )
+        );
     }
 }

@@ -97,6 +97,7 @@ return [
                 'src/Shared/Infrastructure/Doctrine/Type',
                 'src/Security/UserInterface/Form',
                 'src/Shared/Infrastructure/Symfony/Maker',
+                'src/Security/Infrastructure/Symfony/Security/Voter/UserVoter',
             ],
         ],
         ParameterTypeHintSniff::class => [

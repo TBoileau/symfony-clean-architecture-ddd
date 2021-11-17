@@ -14,6 +14,7 @@ final class EmailAddressTest extends TestCase
     {
         $emailAddress = EmailAddress::createFromString('user+1@email.com');
         $this->assertEquals('user+1@email.com', (string) $emailAddress);
+        $this->assertTrue($emailAddress->equalTo(EmailAddress::createFromString('user+1@email.com')));
     }
 
     public function testIfEmailAddressIsInvalid(): void

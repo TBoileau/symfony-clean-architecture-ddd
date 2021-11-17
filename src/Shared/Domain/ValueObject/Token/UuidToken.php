@@ -28,4 +28,9 @@ class UuidToken extends AbstractUuid
     {
         return new UuidToken($uuid);
     }
+
+    public function equalTo(UuidToken $token): bool
+    {
+        return (string) $token === (string) $this;
+    }
 }
