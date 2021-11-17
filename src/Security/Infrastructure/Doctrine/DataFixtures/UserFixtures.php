@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security\Infrastructure\Doctrine\DataFixtures;
 
+use App\Security\Domain\Contract\Security\PasswordHasher\PasswordHasherInterface;
 use App\Security\Domain\Entity\User;
-use App\Security\Domain\PasswordHasher\PasswordHasherInterface;
 use App\Security\Domain\ValueObject\Password\PlainPassword;
 use App\Shared\Domain\ValueObject\Date\DateTime;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;

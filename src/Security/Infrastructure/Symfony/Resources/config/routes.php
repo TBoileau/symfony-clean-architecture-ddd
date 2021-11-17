@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Security\UserInterface\Controller\LoginController;
 use App\Security\UserInterface\Controller\RequestForgottenPasswordController;
+use App\Security\UserInterface\Controller\ResetPasswordController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
@@ -18,8 +19,10 @@ return function (RoutingConfigurator $routes) {
                     ->controller(RequestForgottenPasswordController::class)
                     ->methods([Request::METHOD_GET, Request::METHOD_POST])
                 ->add('_reset_password', '/reset-password/{token}')
+                    ->controller(ResetPasswordController::class)
+                    ->methods([Request::METHOD_GET, Request::METHOD_POST])
                     ->requirements([
-                        'token' => '^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$',
+                        'token' => '^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89AB][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$',
                     ])
     ;
 };

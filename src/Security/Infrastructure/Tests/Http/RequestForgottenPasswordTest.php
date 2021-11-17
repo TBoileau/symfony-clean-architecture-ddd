@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security\Infrastructure\Tests\Http;
 
+use App\Security\Domain\Contract\Gateway\UserGateway;
 use App\Security\Domain\Entity\User;
-use App\Security\Domain\Gateway\UserGateway;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Infrastructure\Symfony\EventListener;
+namespace App\Security\Infrastructure\Symfony\Security\EventListener;
 
+use App\Security\Domain\Contract\Security\PasswordHasher\PasswordHasherInterface;
 use App\Security\Domain\Entity\User;
-use App\Security\Domain\PasswordHasher\PasswordHasherInterface;
 use App\Security\Infrastructure\Symfony\Security\Authenticator\Passport\PasswordCredentials;
 use App\Security\Infrastructure\Symfony\Security\User\UserProxy;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security\Domain\PasswordHasher;
+namespace App\Security\Domain\Contract\Security\PasswordHasher;
 
 use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Security\Domain\ValueObject\Password\PlainPassword;

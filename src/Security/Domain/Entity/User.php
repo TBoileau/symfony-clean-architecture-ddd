@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Security\Domain\Entity;
 
+use App\Security\Domain\Contract\Security\PasswordHasher\PasswordHasherInterface;
 use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Security\Domain\ValueObject\Password\PlainPassword;
+use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Shared\Domain\ValueObject\Date\DateTime;
 use App\Shared\Domain\ValueObject\Date\Interval;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
@@ -70,5 +72,17 @@ class User
     {
         $this->forgottenPasswordRequestedAt = DateTime::now();
         $this->forgottenPasswordToken = UuidToken::create();
+    }
+
+    public function resetPassword(PasswordHasherInterface $passwordHasher): void
+    {
+        if (null === $this->plainPassword) {
+            throw new InvalidArgumentException('Plain password missing.');
+        }
+
+        $this->hashedPassword = $this->plainPassword->hash($passwordHasher);
+        $this->plainPassword = null;
+        $this->forgottenPasswordRequestedAt = null;
+        $this->forgottenPasswordToken = null;
     }
 }

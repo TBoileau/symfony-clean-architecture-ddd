@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Security\Infrastructure\Symfony\PasswordHasher\PasswordHasher;
+use App\Security\Infrastructure\Symfony\Security\PasswordHasher\PasswordHasher;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -24,6 +24,7 @@ return function (ContainerConfigurator $container) {
             __DIR__.'/../../../../Domain/Tests',
             __DIR__.'/../../../../Domain/UseCase/**/*Output.php',
             __DIR__.'/../../../../UserInterface/ViewModel',
+            __DIR__.'/../../../../UserInterface/Input',
             __DIR__.'/../../../../UserInterface/Controller',
             __DIR__.'/../../../../Infrastructure/Symfony/Security/User/UserProxy.php',
             __DIR__.'/../../../../Infrastructure/Symfony/Security/Authenticator/Passport/PasswordCredentials.php',

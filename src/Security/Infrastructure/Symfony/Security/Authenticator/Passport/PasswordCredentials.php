@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\Infrastructure\Symfony\Security\Authenticator\Passport;
 
-use App\Security\Domain\PasswordHasher\PasswordHasherInterface;
+use App\Security\Domain\Contract\Security\PasswordHasher\PasswordHasherInterface;
 use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Security\Domain\ValueObject\Password\PlainPassword;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
