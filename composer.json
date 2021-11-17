@@ -36,6 +36,7 @@
         "symfony/security-bundle": "5.3.*",
         "symfony/serializer": "5.3.*",
         "symfony/string": "5.3.*",
+        "symfony/translation": "5.3.*",
         "symfony/twig-bundle": "5.3.*",
         "symfony/uid": "5.3.*",
         "symfony/validator": "5.3.*",

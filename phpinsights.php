@@ -14,6 +14,7 @@ use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
+use SlevomatCodingStandard\Sniffs\Functions\FunctionLengthSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
@@ -95,6 +96,7 @@ return [
                 'src/Security/Infrastructure/Doctrine/Type',
                 'src/Shared/Infrastructure/Doctrine/Type',
                 'src/Security/UserInterface/Form',
+                'src/Shared/Infrastructure/Symfony/Maker',
             ],
         ],
         ParameterTypeHintSniff::class => [
@@ -126,6 +128,11 @@ return [
                 'src/Security/Domain/ValueObject',
                 'src/Security/Domain/Entity',
                 'src/Shared/Domain/ValueObject',
+            ],
+        ],
+        FunctionLengthSniff::class => [
+            'exclude' => [
+                'src/Shared/Infrastructure/Symfony/Maker',
             ],
         ],
     ],
