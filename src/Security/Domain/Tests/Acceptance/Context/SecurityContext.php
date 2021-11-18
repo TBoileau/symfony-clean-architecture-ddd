@@ -14,12 +14,12 @@ use App\Security\Domain\UseCase\RequestForgottenPassword\RequestForgottenPasswor
 use App\Security\Domain\UseCase\ResetPassword\ResetPassword;
 use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Security\Domain\ValueObject\Password\PlainPassword;
-use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Shared\Domain\ValueObject\Date\DateTime;
 use App\Shared\Domain\ValueObject\Date\Interval;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
 use Behat\Behat\Context\Context;
+use Exception;
 use PHPUnit\Framework\Assert;
 
 final class SecurityContext implements Context
@@ -29,6 +29,15 @@ final class SecurityContext implements Context
     private string $email;
 
     private string $plainPassword;
+
+    private \Closure $callback;
+
+    private PasswordHasher $passwordHasher;
+
+    public function __construct()
+    {
+        $this->passwordHasher = new PasswordHasher();
+    }
 
     /**
      * @Given /^I registered with my email address (.+)$/
@@ -57,11 +66,20 @@ final class SecurityContext implements Context
     }
 
     /**
-     * @Given /^I request a forgotten password$/
+     * @Given /^I requested a forgotten password (\d+) hours ago$/
      */
-    public function iRequestAForgottenPassword(): void
+    public function iRequestAForgottenPassword(int $hours): void
     {
         $this->registeredUser->requestForAForgottenPassword();
+
+        /** @var DateTime $date */
+        $date = $this->registeredUser->forgottenPasswordRequestedAt;
+
+        $this->registeredUser->forgottenPasswordRequestedAt = $date->sub(
+            Interval::createFromString(
+                sprintf('PT%dH', $hours)
+            )
+        );
     }
 
     /**
@@ -70,6 +88,12 @@ final class SecurityContext implements Context
     public function iResetMyPasswordWith(string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+
+        $this->callback = function () {
+            $userGateway = new UserRepository([$this->registeredUser]);
+            $useCase = new ResetPassword($userGateway, $this->passwordHasher);
+            $useCase(new ResetPasswordInput($this->plainPassword, $this->registeredUser));
+        };
     }
 
     /**
@@ -78,6 +102,12 @@ final class SecurityContext implements Context
     public function iRequestAForgottenPasswordWith(string $email): void
     {
         $this->email = $email;
+
+        $this->callback = function () {
+            $userGateway = new UserRepository([$this->registeredUser]);
+            $useCase = new RequestForgottenPassword($userGateway);
+            $useCase(new RequestForgottenPasswordInput($this->email), new RequestForgottenPasswordPresenter());
+        };
     }
 
     /**
@@ -85,31 +115,10 @@ final class SecurityContext implements Context
      */
     public function thenICanUseMyForgottenPasswordTokenForTheNextHours(): void
     {
-        $userGateway = new UserRepository([$this->registeredUser]);
-
-        $useCase = new RequestForgottenPassword($userGateway);
-
-        $useCase(new RequestForgottenPasswordInput($this->email), new RequestForgottenPasswordPresenter());
-
+        $this->callback->call($this);
         Assert::assertNotNull($this->registeredUser->forgottenPasswordRequestedAt);
         Assert::assertNotNull($this->registeredUser->forgottenPasswordToken);
         Assert::assertTrue($this->registeredUser->canResetPassword());
-    }
-
-    /**
-     * @Then /^I get an error that tells me "(.+)"/
-     */
-    public function iGetAnErrorThatMyEmailDoesNotExist(string $errorMessage): void
-    {
-        $userGateway = new UserRepository([$this->registeredUser]);
-
-        $useCase = new RequestForgottenPassword($userGateway);
-
-        try {
-            $useCase(new RequestForgottenPasswordInput($this->email), new RequestForgottenPasswordPresenter());
-        } catch (InvalidArgumentException $exception) {
-            Assert::assertEquals($errorMessage, $exception->getMessage());
-        }
     }
 
     /**
@@ -117,14 +126,7 @@ final class SecurityContext implements Context
      */
     public function myPasswordIsResetAndICanLogInAgain(): void
     {
-        $userGateway = new UserRepository([$this->registeredUser]);
-
-        $passwordHasher = new PasswordHasher();
-
-        $useCase = new ResetPassword($userGateway, $passwordHasher);
-
-        $useCase(new ResetPasswordInput($this->plainPassword, $this->registeredUser));
-
+        $this->callback->call($this);
         Assert::assertNull($this->registeredUser->forgottenPasswordRequestedAt);
         Assert::assertNull($this->registeredUser->forgottenPasswordToken);
         Assert::assertNull($this->registeredUser->plainPassword);
@@ -134,9 +136,21 @@ final class SecurityContext implements Context
         $hashedPassword = $this->registeredUser->hashedPassword;
         Assert::assertTrue(
             $hashedPassword->verify(
-                $passwordHasher,
+                $this->passwordHasher,
                 PlainPassword::createFromString($this->plainPassword)
             )
         );
+    }
+
+    /**
+     * @Then /^I get an error that tells me "(.+)"/
+     */
+    public function iGetAnErrorThatMyEmailDoesNotExist(string $errorMessage): void
+    {
+        try {
+            $this->callback->call($this);
+        } catch (Exception $exception) {
+            Assert::assertEquals($errorMessage, $exception->getMessage());
+        }
     }
 }
