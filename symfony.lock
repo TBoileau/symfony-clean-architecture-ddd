@@ -739,7 +739,7 @@
             "assets/styles/app.css",
             "assets/controllers.json",
             "assets/controllers/hello_controller.js",
-            "assets/app.js",
+            "assets/app.ts",
             "assets/bootstrap.js",
             "config/packages/assets.yaml",
             "config/packages/prod/webpack_encore.yaml",
