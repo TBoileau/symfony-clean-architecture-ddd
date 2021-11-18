@@ -14,6 +14,7 @@ use App\Security\Domain\ValueObject\Password\HashedPassword;
 use App\Security\Domain\ValueObject\Password\PlainPassword;
 use App\Shared\Domain\ValueObject\Email\EmailAddress;
 use App\Shared\Domain\ValueObject\Identifier\UuidIdentifier;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 final class ResetPasswordTest extends TestCase
@@ -58,5 +59,18 @@ final class ResetPasswordTest extends TestCase
             )
         );
         $this->assertFalse($user->canResetPassword());
+    }
+
+    public function testIfResetPasswordIsFailedBecauseUseHasNotRequestAForgottenPassword(): void
+    {
+        $user = User::create(
+            identifier: UuidIdentifier::create(),
+            email: EmailAddress::createFromString('user+2@email.com')
+        );
+        $this->userRepository->users[] = $user;
+        $input = new ResetPasswordInput('new_password', $user);
+
+        $this->expectException(Exception::class);
+        $this->useCase->__invoke($input);
     }
 }
