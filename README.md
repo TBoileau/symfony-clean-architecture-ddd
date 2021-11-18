@@ -6,7 +6,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/TBoileau/rse?style=for-the-badge)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/TBoileau/rse?style=for-the-badge)
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/TBoileau/rse/continuous_integration.yml/develop?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/TBoileau/rse/Continuous%20integration?style=for-the-badge)
 ![Codecov branch](https://img.shields.io/codecov/c/github/TBoileau/rse/develop?style=for-the-badge)
 
 ## Installation
