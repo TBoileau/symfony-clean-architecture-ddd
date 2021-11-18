@@ -1,8 +1,8 @@
-name: RSE
+name: Continuous integration
 on: [push]
 jobs:
-  ci:
-    name: Continuous Functional
+  build:
+    name: Build
     runs-on: ${{ matrix.operating-system }}
     strategy:
       fail-fast: false
@@ -23,8 +23,62 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, xml, ctype, iconv, intl
+          extensions: mbstring, xml, ctype, iconv, intl, xdebug
           coverage: xdebug
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install
+        run: make install db_user=root db_password=Password123! env=test
+      - name: Analyze
+        run: make analyse
+      - name: Tests
+        run: make tests
+      - name: Send code coverage to Codedov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./var/coverage/clover.xml
+          fail_ci_if_error: true
+          verbose: true
+  profile:
+    name: Profile
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php-versions: [ '8.0' ]
+        node-version: [ '14.17' ]
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: 'Password123!'
+        ports:
+          - 3306:3306
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, xml, ctype, iconv, intl, xdebug
+          coverage: xdebug
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -46,9 +100,5 @@ jobs:
           BLACKFIRE_CLIENT_TOKEN: ${{ secrets.BLACKFIRE_CLIENT_TOKEN }}
       - name: Install
         run: make install db_user=root db_password=Password123! env=test
-      - name: Analyze
-        run: make analyse
-      - name: Tests
-        run: make tests
       - name: Profiles
         run: make profile
