@@ -1,4 +1,3 @@
-@RequestForgottenPassword
 Feature: As a user I want to request a forgotten password In order to reset my password
   Scenario: Should create a forgotten password token for the next 24 hours
     Given I registered with my email address user+1@email.com

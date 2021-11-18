@@ -51,7 +51,7 @@ tests:
 profile:
 	php bin/console cache:clear --env=test
 	make prepare env=test
-	php bin/phpunit --testdox --testsuite=e2e
+	php bin/phpunit --testdox --testsuite=e2e --no-coverage
 
 database:
 	php bin/console doctrine:database:drop --if-exists --force --env=$(env)
