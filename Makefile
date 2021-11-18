@@ -1,6 +1,12 @@
 composer:
 	composer valid
 
+eslint:
+	npx eslint assets/
+
+stylelint:
+	npx stylelint "assets/styles/**/*.scss"
+
 twig:
 	php bin/console lint:twig src/Shared/Infrastructure/Symfony/Resources/templates src/Security/Infrastructure/Symfony/Resources/templates
 	vendor/bin/twigcs src/Shared/Infrastructure/Symfony/Resources/templates src/Security/Infrastructure/Symfony/Resources/templates
@@ -18,6 +24,8 @@ phpstan:
 	php vendor/bin/phpstan analyse -c phpstan.neon src --no-progress
 
 fix:
+	npx eslint assets/ --fix
+	npx stylelint "assets/styles/**/*.scss" --fix
 	vendor/bin/php-cs-fixer fix
 
 container:
@@ -25,6 +33,8 @@ container:
 
 analyse:
 	make composer
+	make eslint
+	make stylelint
 	make twig
 	make container
 	make phpcpd
