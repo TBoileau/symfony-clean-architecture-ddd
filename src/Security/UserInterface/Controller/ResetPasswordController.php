@@ -11,6 +11,7 @@ use App\Security\UserInterface\Form\ResetPasswordType;
 use App\Security\UserInterface\Input\ResetPasswordInput;
 use App\Security\UserInterface\Responder\ResetPassword\ResetPasswordResponderInterface;
 use App\Security\UserInterface\ViewModel\ResetPasswordViewModel;
+use Exception;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,9 +36,13 @@ final class ResetPasswordController
         $form = $formFactory->create(ResetPasswordType::class, $input)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $useCase($input);
+            try {
+                $useCase($input);
 
-            return $responder->redirect();
+                return $responder->redirect();
+            } catch (Exception) {
+                throw new BadRequestException('Token invalid.');
+            }
         }
 
         return $responder->send(new ResetPasswordViewModel($form));
