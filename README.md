@@ -1,5 +1,14 @@
 # RSE
 
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/TBoileau/rse?style=for-the-badge)
+![GitHub Release Date](https://img.shields.io/github/release-date/TBoileau/rse?style=for-the-badge)
+
+![GitHub issues](https://img.shields.io/github/issues/TBoileau/rse?style=for-the-badge)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/TBoileau/rse?style=for-the-badge)
+
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/TBoileau/rse/continuous_integration.yml/develop?style=for-the-badge)
+![Codecov branch](https://img.shields.io/codecov/c/github/TBoileau/rse/develop?style=for-the-badge)
+
 ## Installation
 
 Dans un premier temps, cloner le repository :
