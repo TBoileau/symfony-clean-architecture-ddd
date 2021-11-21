@@ -1,7 +1,4 @@
-# RSE
-
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/TBoileau/rse?style=for-the-badge)
-![GitHub Release Date](https://img.shields.io/github/release-date/TBoileau/rse?style=for-the-badge)
+# Proof Of Concept - Clean Architecture & DDD
 
 ![GitHub issues](https://img.shields.io/github/issues/TBoileau/rse?style=for-the-badge)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/TBoileau/rse?style=for-the-badge)
