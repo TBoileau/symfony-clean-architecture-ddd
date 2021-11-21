@@ -2,7 +2,7 @@
     "name": "tboileau/rse",
     "description": "Réseau social d'entreprise",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
